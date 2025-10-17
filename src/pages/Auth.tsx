@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -114,6 +115,11 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <PageMeta 
+        title="Login & Sign Up"
+        description="Access your OT Assessment Portal account to manage clients, assessments, and referrals."
+        canonical={window.location.origin + "/auth"}
+      />
       <div className="w-full max-w-md space-y-4">
         <Button 
           variant="ghost" 

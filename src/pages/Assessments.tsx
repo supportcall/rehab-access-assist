@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, FileText, Calendar } from "lucide-react";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 
 interface Assessment {
   id: string;
@@ -83,6 +84,11 @@ export default function Assessments() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Assessments"
+        description="View and manage occupational therapy environmental assessments."
+        canonical={window.location.origin + "/assessments"}
+      />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">

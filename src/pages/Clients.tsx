@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, ArrowLeft, User } from "lucide-react";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 import {
   Dialog,
   DialogContent,
@@ -149,6 +150,11 @@ export default function Clients() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Client Management"
+        description="Manage patient clients and their occupational therapy assessment records."
+        canonical={window.location.origin + "/clients"}
+      />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">

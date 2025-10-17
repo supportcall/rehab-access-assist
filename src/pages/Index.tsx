@@ -3,12 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ClipboardCheck, Users, FileText, ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 
 const Index = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Professional Environmental Assessments"
+        description="Complete occupational therapy environmental assessments with professional documentation, measurements, and comprehensive reporting for NDIS and aged care."
+        canonical={window.location.origin + "/"}
+      />
       <header className="border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">

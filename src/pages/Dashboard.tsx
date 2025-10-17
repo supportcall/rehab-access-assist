@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Plus, FileText, User as UserIcon, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -92,6 +93,11 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Dashboard"
+        description="Manage your occupational therapy assessments, clients, and referrals."
+        canonical={window.location.origin + "/dashboard"}
+      />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div>

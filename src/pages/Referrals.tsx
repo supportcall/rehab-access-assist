@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, User, Check, X, Share2 } from "lucide-react";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 import {
   Dialog,
   DialogContent,
@@ -236,6 +237,11 @@ export default function Referrals() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Patient Referrals"
+        description="Manage patient referrals and occupational therapy case assignments."
+        canonical={window.location.origin + "/referrals"}
+      />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
