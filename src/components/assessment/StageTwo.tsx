@@ -5,13 +5,14 @@ import { Slider } from "@/components/ui/slider";
 interface StageTwoProps {
   functionalData: any;
   setFunctionalData: (data: any) => void;
+  validationErrors?: Record<string, string>;
 }
 
-export default function StageTwo({ functionalData, setFunctionalData }: StageTwoProps) {
+export default function StageTwo({ functionalData, setFunctionalData, validationErrors = {} }: StageTwoProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="primary_goal">Primary Goal (COPM-lite)</Label>
+        <Label htmlFor="primary_goal">Primary Goal (COPM-lite) *</Label>
         <p className="text-sm text-muted-foreground">What is the ONE thing you want help with?</p>
         <Textarea
           id="primary_goal"
@@ -19,7 +20,11 @@ export default function StageTwo({ functionalData, setFunctionalData }: StageTwo
           value={functionalData.primary_goal}
           onChange={(e) => setFunctionalData({ ...functionalData, primary_goal: e.target.value })}
           placeholder="Describe your main goal..."
+          className={validationErrors.primary_goal ? "border-destructive focus-visible:ring-destructive" : ""}
         />
+        {validationErrors.primary_goal && (
+          <p className="text-sm text-destructive">{validationErrors.primary_goal}</p>
+        )}
       </div>
 
       <div className="space-y-4">

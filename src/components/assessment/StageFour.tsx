@@ -8,9 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface StageFourProps {
   clinicalData: any;
   setClinicalData: (data: any) => void;
+  validationErrors?: Record<string, string>;
 }
 
-export default function StageFour({ clinicalData, setClinicalData }: StageFourProps) {
+export default function StageFour({ clinicalData, setClinicalData, validationErrors = {} }: StageFourProps) {
   const updateField = (field: string, value: any) => {
     setClinicalData({ ...clinicalData, [field]: value });
   };

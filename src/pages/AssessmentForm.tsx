@@ -30,6 +30,7 @@ export default function AssessmentForm() {
   const [currentStage, setCurrentStage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [assessmentId, setAssessmentId] = useState<string | null>(id || null);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   
   // Stage 1 data
   const [selectedClientId, setSelectedClientId] = useState<string>(clientId || "");
@@ -604,9 +605,44 @@ export default function AssessmentForm() {
     }
   };
 
+  const validateCurrentStage = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    if (currentStage === 1) {
+      if (!clientData.first_name?.trim()) {
+        errors.first_name = "First name is required";
+      }
+      if (!clientData.last_name?.trim()) {
+        errors.last_name = "Last name is required";
+      }
+    }
+
+    if (currentStage === 2) {
+      if (!functionalData.primary_goal?.trim()) {
+        errors.primary_goal = "Primary goal is required";
+      }
+    }
+
+    setValidationErrors(errors);
+    
+    if (Object.keys(errors).length > 0) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    return true;
+  };
+
   const nextStage = () => {
     if (currentStage < 11) {
-      setCurrentStage(currentStage + 1);
+      if (validateCurrentStage()) {
+        setValidationErrors({});
+        setCurrentStage(currentStage + 1);
+      }
     }
   };
 
@@ -673,6 +709,7 @@ export default function AssessmentForm() {
                 setSelectedClientId={setSelectedClientId}
                 clientData={clientData}
                 setClientData={setClientData}
+                validationErrors={validationErrors}
               />
             )}
 
@@ -680,6 +717,7 @@ export default function AssessmentForm() {
               <StageTwo
                 functionalData={functionalData}
                 setFunctionalData={setFunctionalData}
+                validationErrors={validationErrors}
               />
             )}
 
@@ -695,6 +733,7 @@ export default function AssessmentForm() {
               <StageFour
                 clinicalData={clinicalData}
                 setClinicalData={setClinicalData}
+                validationErrors={validationErrors}
               />
             )}
 

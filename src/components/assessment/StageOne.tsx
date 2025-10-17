@@ -10,6 +10,7 @@ interface StageOneProps {
   setSelectedClientId: (id: string) => void;
   clientData: any;
   setClientData: (data: any) => void;
+  validationErrors?: Record<string, string>;
 }
 
 export default function StageOne({
@@ -17,6 +18,7 @@ export default function StageOne({
   setSelectedClientId,
   clientData,
   setClientData,
+  validationErrors = {},
 }: StageOneProps) {
   const [clients, setClients] = useState<any[]>([]);
   const [mode, setMode] = useState<"select" | "new">(selectedClientId ? "select" : "new");
@@ -95,7 +97,11 @@ export default function StageOne({
             onChange={(e) => setClientData({ ...clientData, first_name: e.target.value })}
             required
             disabled={mode === "select"}
+            className={validationErrors.first_name ? "border-destructive focus-visible:ring-destructive" : ""}
           />
+          {validationErrors.first_name && (
+            <p className="text-sm text-destructive">{validationErrors.first_name}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="last_name">Last Name *</Label>
@@ -105,7 +111,11 @@ export default function StageOne({
             onChange={(e) => setClientData({ ...clientData, last_name: e.target.value })}
             required
             disabled={mode === "select"}
+            className={validationErrors.last_name ? "border-destructive focus-visible:ring-destructive" : ""}
           />
+          {validationErrors.last_name && (
+            <p className="text-sm text-destructive">{validationErrors.last_name}</p>
+          )}
         </div>
       </div>
 
