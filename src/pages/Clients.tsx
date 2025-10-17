@@ -322,7 +322,7 @@ export default function Clients() {
         {loading ? (
           <p className="text-center text-muted-foreground">Loading clients...</p>
         ) : clients.length === 0 ? (
-          <Card>
+          <Card className="hover:bg-primary/10 transition-colors">
             <CardContent className="py-12 text-center">
               <User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-lg text-muted-foreground mb-4">No clients yet</p>
@@ -335,7 +335,7 @@ export default function Clients() {
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {clients.map((client) => (
-              <Card key={client.id} className="hover:shadow-lg transition-shadow">
+              <Card key={client.id} className="hover:shadow-lg hover:bg-primary/10 transition-all">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <User className="h-5 w-5" />

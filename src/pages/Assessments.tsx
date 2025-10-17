@@ -109,7 +109,7 @@ export default function Assessments() {
         {loading ? (
           <p className="text-center text-muted-foreground">Loading assessments...</p>
         ) : assessments.length === 0 ? (
-          <Card>
+          <Card className="hover:bg-primary/10 transition-colors">
             <CardContent className="py-12 text-center">
               <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-lg text-muted-foreground mb-4">No assessments yet</p>
@@ -121,7 +121,7 @@ export default function Assessments() {
         ) : (
           <div className="space-y-4">
             {assessments.map((assessment) => (
-              <Card key={assessment.id} className="hover:shadow-lg transition-shadow cursor-pointer"
+              <Card key={assessment.id} className="hover:shadow-lg hover:bg-primary/10 transition-all cursor-pointer"
                 onClick={() => navigate(`/assessment/${assessment.id}`)}>
                 <CardHeader>
                   <div className="flex items-start justify-between">

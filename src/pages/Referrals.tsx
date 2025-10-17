@@ -285,7 +285,7 @@ export default function Referrals() {
         {loading ? (
           <p className="text-center text-muted-foreground">Loading referrals...</p>
         ) : referrals.length === 0 ? (
-          <Card>
+          <Card className="hover:bg-primary/10 transition-colors">
             <CardContent className="py-12 text-center">
               <User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-lg text-muted-foreground mb-4">No referrals yet</p>
@@ -297,7 +297,7 @@ export default function Referrals() {
         ) : (
           <div className="space-y-4">
             {referrals.map((referral) => (
-              <Card key={referral.id}>
+              <Card key={referral.id} className="hover:bg-primary/10 transition-colors">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">

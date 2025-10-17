@@ -53,7 +53,7 @@ const Index = () => {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <Card>
+            <Card className="hover:bg-primary/10 transition-colors">
               <CardHeader>
                 <Users className="h-10 w-10 text-primary mb-2" />
                 <CardTitle>Multi-User Access</CardTitle>
@@ -63,7 +63,7 @@ const Index = () => {
               </CardHeader>
             </Card>
 
-            <Card>
+            <Card className="hover:bg-primary/10 transition-colors">
               <CardHeader>
                 <ClipboardCheck className="h-10 w-10 text-primary mb-2" />
                 <CardTitle>Dynamic Assessments</CardTitle>
@@ -73,7 +73,7 @@ const Index = () => {
               </CardHeader>
             </Card>
 
-            <Card>
+            <Card className="hover:bg-primary/10 transition-colors">
               <CardHeader>
                 <FileText className="h-10 w-10 text-primary mb-2" />
                 <CardTitle>Professional Reports</CardTitle>
@@ -84,7 +84,7 @@ const Index = () => {
             </Card>
           </div>
 
-          <Card className="border-primary/50">
+          <Card className="border-primary/50 hover:bg-primary/10 transition-colors">
             <CardHeader>
               <CardTitle>Key Features</CardTitle>
             </CardHeader>
