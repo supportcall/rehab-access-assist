@@ -39,6 +39,17 @@ const Index = () => {
               Complete environmental mobility and access assessments with comprehensive documentation,
               measurements, and professional reporting.
             </p>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 max-w-3xl mx-auto mt-6">
+              <p className="text-lg font-semibold text-primary mb-2">
+                Helping You Secure the Support You Need
+              </p>
+              <p className="text-muted-foreground">
+                Our comprehensive assessment portal helps gather all the critical information needed 
+                for clients, patients, and occupational therapists to secure the funding required 
+                to provide essential aids and support. From detailed measurements to professional 
+                documentation, we ensure your funding applications have everything they need to succeed.
+              </p>
+            </div>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
