@@ -105,7 +105,7 @@ export default function Assessments() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         {loading ? (
           <p className="text-center text-muted-foreground">Loading assessments...</p>
         ) : assessments.length === 0 ? (

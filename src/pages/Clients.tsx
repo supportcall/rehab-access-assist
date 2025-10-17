@@ -318,7 +318,7 @@ export default function Clients() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         {loading ? (
           <p className="text-center text-muted-foreground">Loading clients...</p>
         ) : clients.length === 0 ? (

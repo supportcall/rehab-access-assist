@@ -11,7 +11,30 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta 
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "OT Assessment Portal",
+          "description": "Professional occupational therapy environmental assessments with comprehensive documentation and reporting for NDIS and aged care.",
+          "url": window.location.origin,
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "category": "Healthcare Services"
+          },
+          "featureList": [
+            "Multi-stage environmental assessments",
+            "Photo documentation with measurements",
+            "Client and carer input collection",
+            "PDF report generation",
+            "Mobile-responsive design",
+            "Secure cloud storage"
+          ]
+        })
+      }} />
+      <PageMeta
         title="Professional Environmental Assessments"
         description="Complete occupational therapy environmental assessments with professional documentation, measurements, and comprehensive reporting for NDIS and aged care."
         canonical={window.location.origin + "/"}
@@ -19,16 +42,16 @@ const Index = () => {
       <header className="border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="EnabledCare Logo" className="h-10" />
+            <img src={logo} alt="EnabledCare - Occupational Therapy Assessment Portal" className="h-10" />
           </div>
-          <Button onClick={() => navigate("/auth")}>
+          <Button onClick={() => navigate("/auth")} aria-label="Login or sign up to access portal">
             Login / Sign Up
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Button>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-16">
+      <main id="main-content" className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-12">
           <div className="text-center space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
@@ -119,9 +142,9 @@ const Index = () => {
           </Card>
 
           <div className="text-center">
-            <Button size="lg" onClick={() => navigate("/auth")}>
+            <Button size="lg" onClick={() => navigate("/auth")} aria-label="Get started with OT assessment portal">
               Get Started
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </Button>
           </div>
         </div>

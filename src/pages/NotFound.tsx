@@ -15,17 +15,17 @@ const NotFound = () => {
         canonical={window.location.origin + "/404"}
       />
       <div className="flex flex-1 items-center justify-center bg-background">
-        <div className="text-center px-4">
+        <main id="main-content" className="text-center px-4">
           <h1 className="mb-4 text-6xl font-bold text-foreground">404</h1>
           <p className="mb-6 text-xl text-muted-foreground">Oops! Page not found</p>
           <p className="mb-8 text-muted-foreground max-w-md mx-auto">
             The page you're looking for doesn't exist or has been moved.
           </p>
-          <Button onClick={() => navigate("/")} size="lg">
-            <Home className="mr-2 h-4 w-4" />
+          <Button onClick={() => navigate("/")} size="lg" aria-label="Return to homepage">
+            <Home className="mr-2 h-4 w-4" aria-hidden="true" />
             Return to Home
           </Button>
-        </div>
+        </main>
       </div>
       
       <Footer />

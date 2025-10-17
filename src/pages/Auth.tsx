@@ -169,18 +169,19 @@ export default function Auth() {
         description="Access your OT Assessment Portal account to manage clients, assessments, and referrals."
         canonical={window.location.origin + "/auth"}
       />
-      <div className="w-full max-w-md space-y-4">
+      <main id="main-content" className="w-full max-w-md space-y-4">
         <Button 
           variant="ghost" 
           onClick={() => navigate("/")}
           className="mb-2"
+          aria-label="Return to home page"
         >
           ← Back to Home
         </Button>
         <Card className="w-full">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <img src={logo} alt="EnabledCare Logo" className="h-16" />
+            <img src={logo} alt="EnabledCare - OT Assessment Portal" className="h-16" />
           </div>
           <div className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold">OT Assessment Portal</CardTitle>
@@ -293,7 +294,7 @@ export default function Auth() {
           </Tabs>
         </CardContent>
       </Card>
-      </div>
+      </main>
       
       <Footer />
     </div>

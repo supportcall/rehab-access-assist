@@ -121,7 +121,7 @@ export default function Dashboard() {
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="EnabledCare Logo" className="h-12" />
+            <img src={logo} alt="EnabledCare - OT Assessment Portal" className="h-12" />
             <div>
               <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
               <p className="text-sm text-muted-foreground">
@@ -134,18 +134,22 @@ export default function Dashboard() {
             )}
             </div>
           </div>
-          <Button variant="ghost" onClick={handleLogout}>
-            <LogOut className="mr-2 h-4 w-4" />
+          <Button variant="ghost" onClick={handleLogout} aria-label="Logout from portal">
+            <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
             Logout
           </Button>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         <div className="grid gap-6 md:grid-cols-3 mb-8">
           <Card 
             className="cursor-pointer hover:shadow-lg hover:bg-primary/10 transition-all"
             onClick={() => navigate("/clients")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate("/clients")}
+            aria-label="View total clients"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Clients</CardTitle>
@@ -159,6 +163,10 @@ export default function Dashboard() {
           <Card 
             className="cursor-pointer hover:shadow-lg hover:bg-primary/10 transition-all"
             onClick={() => navigate("/assessments")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate("/assessments")}
+            aria-label="View all assessments"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Assessments</CardTitle>
@@ -172,6 +180,10 @@ export default function Dashboard() {
           <Card 
             className="cursor-pointer hover:shadow-lg hover:bg-primary/10 transition-all"
             onClick={() => navigate("/assessments")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate("/assessments")}
+            aria-label="View draft assessments"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Draft Assessments</CardTitle>
@@ -185,6 +197,10 @@ export default function Dashboard() {
           <Card 
             className="cursor-pointer hover:shadow-lg hover:bg-primary/10 transition-all"
             onClick={() => navigate("/referrals")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate("/referrals")}
+            aria-label="View pending referrals"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Pending Referrals</CardTitle>

@@ -281,7 +281,7 @@ export default function Referrals() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         {loading ? (
           <p className="text-center text-muted-foreground">Loading referrals...</p>
         ) : referrals.length === 0 ? (

@@ -222,7 +222,7 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <main className="flex-1 container mx-auto px-4 py-8">
+        <main id="main-content" className="flex-1 container mx-auto px-4 py-8">
           <Tabs defaultValue="requests" className="space-y-6">
             <TabsList>
               <TabsTrigger value="requests" className="flex items-center gap-2">
