@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { ArrowLeft, ArrowRight, Plus, Save } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import Footer from "@/components/Footer";
@@ -237,7 +238,7 @@ export default function AssessmentForm() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     }
@@ -266,7 +267,7 @@ export default function AssessmentForm() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     }
@@ -595,7 +596,7 @@ export default function AssessmentForm() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     } finally {

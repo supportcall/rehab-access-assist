@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
@@ -63,7 +64,7 @@ export default function Auth() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     } finally {
@@ -120,7 +121,7 @@ export default function Auth() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     } finally {

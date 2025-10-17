@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { ArrowLeft, User, Check, X, Share2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
@@ -94,44 +95,7 @@ export default function Referrals() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAccept = async (referralId: string, clientId: string) => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      // Update referral status
-      const { error: referralError } = await supabase
-        .from("referrals")
-        .update({ status: "accepted" })
-        .eq("id", referralId);
-
-      if (referralError) throw referralError;
-
-      // Assign OT to client
-      const { error: clientError } = await supabase
-        .from("clients")
-        .update({ assigned_ot_id: user?.id })
-        .eq("id", clientId);
-
-      if (clientError) throw clientError;
-
-      toast({
-        title: "Referral Accepted",
-        description: "Patient has been assigned to you",
-      });
-
-      await loadReferrals();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     }
@@ -166,7 +130,7 @@ export default function Referrals() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     }
@@ -242,7 +206,7 @@ export default function Referrals() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     }

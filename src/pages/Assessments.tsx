@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { ArrowLeft, FileText, Calendar } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
@@ -61,7 +62,7 @@ export default function Assessments() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: getSafeErrorMessage(error),
         variant: "destructive",
       });
     } finally {
