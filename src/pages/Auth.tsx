@@ -113,7 +113,15 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
+      <div className="w-full max-w-md space-y-4">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate("/")}
+          className="mb-2"
+        >
+          ← Back to Home
+        </Button>
+        <Card className="w-full">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">OT Assessment Portal</CardTitle>
           <CardDescription>
@@ -224,6 +232,7 @@ export default function Auth() {
           </Tabs>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
