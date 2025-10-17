@@ -13,10 +13,12 @@ export default function Dashboard() {
   const { toast } = useToast();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [systemId, setSystemId] = useState<string>("");
   const [stats, setStats] = useState({
     totalClients: 0,
     totalAssessments: 0,
     draftAssessments: 0,
+    pendingReferrals: 0,
   });
 
   useEffect(() => {
@@ -47,16 +49,25 @@ export default function Dashboard() {
 
   const loadStats = async () => {
     try {
-      const [clientsRes, assessmentsRes, draftRes] = await Promise.all([
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      const [profileRes, clientsRes, assessmentsRes, draftRes, referralsRes] = await Promise.all([
+        supabase.from("profiles").select("system_id").eq("id", user?.id).single(),
         supabase.from("clients").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }).eq("status", "draft"),
+        supabase.from("referrals").select("id", { count: "exact", head: true }).eq("target_ot_id", user?.id).eq("status", "pending"),
       ]);
+
+      if (profileRes.data?.system_id) {
+        setSystemId(profileRes.data.system_id);
+      }
 
       setStats({
         totalClients: clientsRes.count || 0,
         totalAssessments: assessmentsRes.count || 0,
         draftAssessments: draftRes.count || 0,
+        pendingReferrals: referralsRes.count || 0,
       });
     } catch (error) {
       console.error("Error loading stats:", error);
@@ -88,6 +99,11 @@ export default function Dashboard() {
             <p className="text-sm text-muted-foreground">
               Welcome, {user?.user_metadata?.first_name || user?.email}
             </p>
+            {systemId && (
+              <p className="text-sm font-mono text-primary mt-1">
+                Your OT ID: {systemId}
+              </p>
+            )}
           </div>
           <Button variant="ghost" onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
@@ -127,6 +143,45 @@ export default function Dashboard() {
               <div className="text-2xl font-bold">{stats.draftAssessments}</div>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Pending Referrals</CardTitle>
+              <UserIcon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.pendingReferrals}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          <Card className="md:col-span-2 lg:col-span-4">
+            <CardHeader>
+              <CardTitle>Your System ID</CardTitle>
+              <CardDescription>Share this ID with patients to receive referrals</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-4">
+                <code className="flex-1 px-4 py-2 bg-muted rounded-md text-lg font-mono">
+                  {systemId || "Loading..."}
+                </code>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    navigator.clipboard.writeText(systemId);
+                    toast({
+                      title: "Copied!",
+                      description: "System ID copied to clipboard",
+                    });
+                  }}
+                  disabled={!systemId}
+                >
+                  Copy ID
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -158,6 +213,14 @@ export default function Dashboard() {
               >
                 <FileText className="mr-2 h-4 w-4" />
                 View Assessments
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full justify-start"
+                onClick={() => navigate("/referrals")}
+              >
+                <UserIcon className="mr-2 h-4 w-4" />
+                Manage Referrals {stats.pendingReferrals > 0 && `(${stats.pendingReferrals})`}
               </Button>
             </CardContent>
           </Card>

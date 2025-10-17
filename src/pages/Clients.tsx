@@ -27,6 +27,8 @@ interface Client {
   diagnosis: string | null;
   funding_body: string | null;
   primary_mobility_aid: string | null;
+  system_id: string | null;
+  assigned_ot_id: string | null;
   created_at: string;
 }
 
@@ -44,6 +46,7 @@ export default function Clients() {
     funding_body: "",
     primary_mobility_aid: "",
     notes: "",
+    ot_system_id: "",
   });
 
   useEffect(() => {
@@ -87,6 +90,23 @@ export default function Clients() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error("Not authenticated");
 
+      let assignedOtId = null;
+      
+      // If OT system ID is provided, look up the OT's profile ID
+      if (formData.ot_system_id.trim()) {
+        const { data: otProfile, error: otError } = await supabase
+          .from("profiles")
+          .select("id")
+          .eq("system_id", formData.ot_system_id.trim())
+          .single();
+
+        if (otError || !otProfile) {
+          throw new Error("Invalid OT System ID. Please check and try again.");
+        }
+        
+        assignedOtId = otProfile.id;
+      }
+
       const { error } = await supabase.from("clients").insert({
         first_name: formData.first_name,
         last_name: formData.last_name,
@@ -95,6 +115,7 @@ export default function Clients() {
         funding_body: formData.funding_body as any || null,
         primary_mobility_aid: formData.primary_mobility_aid as any || null,
         notes: formData.notes || null,
+        assigned_ot_id: assignedOtId,
       });
 
       if (error) throw error;
@@ -113,6 +134,7 @@ export default function Clients() {
         funding_body: "",
         primary_mobility_aid: "",
         notes: "",
+        ot_system_id: "",
       });
       
       await loadClients();
@@ -238,6 +260,19 @@ export default function Clients() {
                   />
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="ot_system_id">Assign OT (Optional)</Label>
+                  <Input
+                    id="ot_system_id"
+                    placeholder="Enter OT System ID (e.g., OT-123456)"
+                    value={formData.ot_system_id}
+                    onChange={(e) => setFormData({ ...formData, ot_system_id: e.target.value })}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Leave blank to assign later
+                  </p>
+                </div>
+
                 <Button type="submit" className="w-full">Add Client</Button>
               </form>
             </DialogContent>
@@ -270,6 +305,11 @@ export default function Clients() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 text-sm">
+                  {client.system_id && (
+                    <p className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                      Patient ID: {client.system_id}
+                    </p>
+                  )}
                   {client.date_of_birth && (
                     <p className="text-muted-foreground">
                       DOB: {new Date(client.date_of_birth).toLocaleDateString()}
@@ -286,6 +326,11 @@ export default function Clients() {
                   {client.primary_mobility_aid && (
                     <p className="text-muted-foreground">
                       Mobility Aid: {client.primary_mobility_aid.charAt(0).toUpperCase() + client.primary_mobility_aid.slice(1)}
+                    </p>
+                  )}
+                  {client.assigned_ot_id && (
+                    <p className="text-xs text-muted-foreground border-t pt-2 mt-2">
+                      ✓ OT Assigned
                     </p>
                   )}
                   <Button

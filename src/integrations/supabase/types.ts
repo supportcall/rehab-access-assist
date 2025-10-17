@@ -52,6 +52,7 @@ export type Database = {
       assessments: {
         Row: {
           assessment_date: string | null
+          assigned_ot_id: string | null
           client_id: string
           completed_at: string | null
           created_at: string | null
@@ -69,6 +70,7 @@ export type Database = {
         }
         Insert: {
           assessment_date?: string | null
+          assigned_ot_id?: string | null
           client_id: string
           completed_at?: string | null
           created_at?: string | null
@@ -86,6 +88,7 @@ export type Database = {
         }
         Update: {
           assessment_date?: string | null
+          assigned_ot_id?: string | null
           client_id?: string
           completed_at?: string | null
           created_at?: string | null
@@ -102,6 +105,13 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "assessments_assigned_ot_id_fkey"
+            columns: ["assigned_ot_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "assessments_client_id_fkey"
             columns: ["client_id"]
@@ -277,6 +287,7 @@ export type Database = {
       }
       clients: {
         Row: {
+          assigned_ot_id: string | null
           created_at: string | null
           created_by: string | null
           date_of_birth: string | null
@@ -289,9 +300,11 @@ export type Database = {
           primary_mobility_aid:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          system_id: string | null
           updated_at: string | null
         }
         Insert: {
+          assigned_ot_id?: string | null
           created_at?: string | null
           created_by?: string | null
           date_of_birth?: string | null
@@ -304,9 +317,11 @@ export type Database = {
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          system_id?: string | null
           updated_at?: string | null
         }
         Update: {
+          assigned_ot_id?: string | null
           created_at?: string | null
           created_by?: string | null
           date_of_birth?: string | null
@@ -319,9 +334,17 @@ export type Database = {
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          system_id?: string | null
           updated_at?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "clients_assigned_ot_id_fkey"
+            columns: ["assigned_ot_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "clients_created_by_fkey"
             columns: ["created_by"]
@@ -949,6 +972,7 @@ export type Database = {
           id: string
           last_name: string | null
           phone: string | null
+          system_id: string | null
           updated_at: string | null
         }
         Insert: {
@@ -958,6 +982,7 @@ export type Database = {
           id: string
           last_name?: string | null
           phone?: string | null
+          system_id?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -967,9 +992,75 @@ export type Database = {
           id?: string
           last_name?: string | null
           phone?: string | null
+          system_id?: string | null
           updated_at?: string | null
         }
         Relationships: []
+      }
+      referrals: {
+        Row: {
+          client_id: string
+          created_at: string | null
+          id: string
+          notes: string | null
+          referred_to_ot_id: string | null
+          requesting_ot_id: string | null
+          status: string
+          target_ot_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          client_id: string
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          referred_to_ot_id?: string | null
+          requesting_ot_id?: string | null
+          status?: string
+          target_ot_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          client_id?: string
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          referred_to_ot_id?: string | null
+          requesting_ot_id?: string | null
+          status?: string
+          target_ot_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referrals_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_referred_to_ot_id_fkey"
+            columns: ["referred_to_ot_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_requesting_ot_id_fkey"
+            columns: ["requesting_ot_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_target_ot_id_fkey"
+            columns: ["target_ot_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       risks_controls: {
         Row: {
@@ -1468,6 +1559,10 @@ export type Database = {
           admin_password: string
         }
         Returns: Json
+      }
+      generate_system_id: {
+        Args: { prefix: string }
+        Returns: string
       }
       has_role: {
         Args: {

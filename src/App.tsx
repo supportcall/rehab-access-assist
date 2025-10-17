@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Clients from "./pages/Clients";
 import Assessments from "./pages/Assessments";
 import AssessmentForm from "./pages/AssessmentForm";
+import Referrals from "./pages/Referrals";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/assessments" element={<Assessments />} />
+          <Route path="/referrals" element={<Referrals />} />
           <Route path="/assessment/new" element={<AssessmentForm />} />
           <Route path="/assessment/:id" element={<AssessmentForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
