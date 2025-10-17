@@ -53,7 +53,7 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser();
       
       const [profileRes, clientsRes, assessmentsRes, draftRes, referralsRes] = await Promise.all([
-        supabase.from("profiles").select("system_id").eq("id", user?.id).single(),
+        supabase.from("profiles").select("system_id").eq("id", user?.id).maybeSingle(),
         supabase.from("clients").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }).eq("status", "draft"),

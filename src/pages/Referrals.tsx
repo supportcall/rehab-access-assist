@@ -25,7 +25,9 @@ interface Referral {
   status: string;
   notes: string | null;
   created_at: string;
+  client_id: string;
   clients: {
+    id: string;
     first_name: string;
     last_name: string;
     system_id: string;
@@ -68,10 +70,12 @@ export default function Referrals() {
         .from("referrals")
         .select(`
           id,
+          client_id,
           status,
           notes,
           created_at,
           clients (
+            id,
             first_name,
             last_name,
             system_id
@@ -188,13 +192,13 @@ export default function Referrals() {
 
       // Get client ID from current referral
       const currentReferral = referrals.find(r => r.id === referralId);
-      if (!currentReferral?.clients) throw new Error("Client not found");
+      if (!currentReferral) throw new Error("Referral not found");
 
       // Create new referral to the target OT
       const { error: newRefError } = await supabase
         .from("referrals")
         .insert({
-          client_id: currentReferral.clients.system_id,
+          client_id: currentReferral.client_id,
           requesting_ot_id: user?.id,
           target_ot_id: targetOt.id,
           status: "pending",
@@ -309,7 +313,7 @@ export default function Referrals() {
                     <div className="flex gap-2">
                       <Button
                         size="sm"
-                        onClick={() => handleAccept(referral.id, referral.clients?.system_id || "")}
+                        onClick={() => handleAccept(referral.id, referral.client_id)}
                       >
                         <Check className="mr-2 h-4 w-4" />
                         Accept

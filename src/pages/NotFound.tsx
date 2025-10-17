@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 
 const NotFound = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="flex min-h-screen flex-col">
       <PageMeta 
@@ -19,7 +21,7 @@ const NotFound = () => {
           <p className="mb-8 text-muted-foreground max-w-md mx-auto">
             The page you're looking for doesn't exist or has been moved.
           </p>
-          <Button onClick={() => window.location.href = "/"} size="lg">
+          <Button onClick={() => navigate("/")} size="lg">
             <Home className="mr-2 h-4 w-4" />
             Return to Home
           </Button>
