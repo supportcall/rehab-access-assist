@@ -139,9 +139,18 @@ export default function Referrals() {
 
   const handleReject = async (referralId: string) => {
     try {
+      // Validate rejection notes
+      if (!actionNotes.trim()) {
+        throw new Error("Please provide a reason for rejection");
+      }
+
+      if (actionNotes.length > 2000) {
+        throw new Error("Rejection notes must be less than 2000 characters");
+      }
+
       const { error } = await supabase
         .from("referrals")
-        .update({ status: "rejected", notes: actionNotes })
+        .update({ status: "rejected", notes: actionNotes.trim() })
         .eq("id", referralId);
 
       if (error) throw error;
@@ -165,6 +174,20 @@ export default function Referrals() {
 
   const handleRefer = async (referralId: string) => {
     try {
+      // Validate notes length
+      if (actionNotes && actionNotes.length > 2000) {
+        throw new Error("Notes must be less than 2000 characters");
+      }
+
+      // Validate system ID format
+      if (!referToOtId.trim()) {
+        throw new Error("OT System ID is required");
+      }
+
+      if (!/^[A-Z]{2}-\d{6}$/.test(referToOtId.trim())) {
+        throw new Error("Invalid OT System ID format. Expected format: OT-123456");
+      }
+
       const { data: { user } } = await supabase.auth.getUser();
 
       // Look up the OT by system ID
@@ -184,7 +207,7 @@ export default function Referrals() {
         .update({ 
           status: "referred", 
           referred_to_ot_id: targetOt.id,
-          notes: actionNotes 
+          notes: actionNotes?.trim() || null
         })
         .eq("id", referralId);
 
@@ -202,7 +225,7 @@ export default function Referrals() {
           requesting_ot_id: user?.id,
           target_ot_id: targetOt.id,
           status: "pending",
-          notes: `Referred by ${user?.user_metadata?.first_name || 'OT'}: ${actionNotes}`,
+          notes: `Referred by ${user?.user_metadata?.first_name || 'OT'}: ${actionNotes || 'No notes'}`,
         });
 
       if (newRefError) throw newRefError;

@@ -88,6 +88,32 @@ export default function Clients() {
     e.preventDefault();
     
     try {
+      // Validate required fields
+      if (!formData.first_name.trim() || !formData.last_name.trim()) {
+        throw new Error("First name and last name are required");
+      }
+
+      // Validate field lengths
+      if (formData.first_name.length > 100 || formData.last_name.length > 100) {
+        throw new Error("Names must be less than 100 characters");
+      }
+
+      if (formData.diagnosis && formData.diagnosis.length > 500) {
+        throw new Error("Diagnosis must be less than 500 characters");
+      }
+
+      if (formData.notes && formData.notes.length > 2000) {
+        throw new Error("Notes must be less than 2000 characters");
+      }
+
+      // Validate date of birth is not in the future
+      if (formData.date_of_birth) {
+        const dob = new Date(formData.date_of_birth);
+        if (dob > new Date()) {
+          throw new Error("Date of birth cannot be in the future");
+        }
+      }
+
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error("Not authenticated");
 
@@ -95,6 +121,11 @@ export default function Clients() {
       
       // If OT system ID is provided, look up the OT's profile ID
       if (formData.ot_system_id.trim()) {
+        // Validate system ID format (alphanumeric with hyphens)
+        if (!/^[A-Z]{2}-\d{6}$/.test(formData.ot_system_id.trim())) {
+          throw new Error("Invalid OT System ID format. Expected format: OT-123456");
+        }
+
         const { data: otProfile, error: otError } = await supabase
           .from("profiles")
           .select("id")
@@ -109,13 +140,13 @@ export default function Clients() {
       }
 
       const { error } = await supabase.from("clients").insert({
-        first_name: formData.first_name,
-        last_name: formData.last_name,
+        first_name: formData.first_name.trim(),
+        last_name: formData.last_name.trim(),
         date_of_birth: formData.date_of_birth || null,
-        diagnosis: formData.diagnosis || null,
+        diagnosis: formData.diagnosis?.trim() || null,
         funding_body: formData.funding_body as any || null,
         primary_mobility_aid: formData.primary_mobility_aid as any || null,
-        notes: formData.notes || null,
+        notes: formData.notes?.trim() || null,
         assigned_ot_id: assignedOtId,
       });
 

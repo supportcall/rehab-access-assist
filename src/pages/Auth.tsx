@@ -38,8 +38,17 @@ export default function Auth() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: loginEmail,
+      // Validate inputs
+      if (!loginEmail.trim() || !loginPassword) {
+        throw new Error("Email and password are required");
+      }
+
+      if (!loginEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        throw new Error("Please enter a valid email address");
+      }
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: loginEmail.trim(),
         password: loginPassword,
       });
 
@@ -67,33 +76,39 @@ export default function Auth() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email: signupEmail,
+      // Validate inputs
+      if (!signupEmail.trim() || !signupPassword || !firstName.trim() || !lastName.trim()) {
+        throw new Error("All fields are required");
+      }
+
+      if (firstName.length > 100 || lastName.length > 100) {
+        throw new Error("Names must be less than 100 characters");
+      }
+
+      if (signupPassword.length < 6) {
+        throw new Error("Password must be at least 6 characters");
+      }
+
+      if (!signupEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        throw new Error("Please enter a valid email address");
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email: signupEmail.trim(),
         password: signupPassword,
         options: {
           emailRedirectTo: `${window.location.origin}/dashboard`,
           data: {
-            first_name: firstName,
-            last_name: lastName,
+            first_name: firstName.trim(),
+            last_name: lastName.trim(),
           },
         },
       });
 
       if (error) throw error;
 
-      // Assign OT admin role
-      if (data.user) {
-        const { error: roleError } = await supabase
-          .from("user_roles")
-          .insert({
-            user_id: data.user.id,
-            role: "ot_admin",
-          });
-
-        if (roleError) {
-          console.error("Error assigning role:", roleError);
-        }
-      }
+      // Role is now automatically assigned by database trigger (handle_new_user_role)
+      // No client-side role manipulation allowed
 
       toast({
         title: "Success",
