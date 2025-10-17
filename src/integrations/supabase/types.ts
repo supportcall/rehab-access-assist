@@ -118,6 +118,163 @@ export type Database = {
           },
         ]
       }
+      at_audit: {
+        Row: {
+          assessment_id: string
+          at_compliance: boolean | null
+          at_condition: string | null
+          at_maintenance: string | null
+          charging_requirements: string | null
+          created_at: string | null
+          current_at_type: string | null
+          id: string
+          maneuvering_envelopes: string | null
+          photo_urls: string[] | null
+          power_requirements: string | null
+          storage_requirements: string | null
+          structural_works_justification: string | null
+          structural_works_still_required: boolean | null
+          trial_outcomes: string | null
+          trials_conducted: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          assessment_id: string
+          at_compliance?: boolean | null
+          at_condition?: string | null
+          at_maintenance?: string | null
+          charging_requirements?: string | null
+          created_at?: string | null
+          current_at_type?: string | null
+          id?: string
+          maneuvering_envelopes?: string | null
+          photo_urls?: string[] | null
+          power_requirements?: string | null
+          storage_requirements?: string | null
+          structural_works_justification?: string | null
+          structural_works_still_required?: boolean | null
+          trial_outcomes?: string | null
+          trials_conducted?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          at_compliance?: boolean | null
+          at_condition?: string | null
+          at_maintenance?: string | null
+          charging_requirements?: string | null
+          created_at?: string | null
+          current_at_type?: string | null
+          id?: string
+          maneuvering_envelopes?: string | null
+          photo_urls?: string[] | null
+          power_requirements?: string | null
+          storage_requirements?: string | null
+          structural_works_justification?: string | null
+          structural_works_still_required?: boolean | null
+          trial_outcomes?: string | null
+          trials_conducted?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "at_audit_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      builder_collaboration: {
+        Row: {
+          assessment_id: string
+          bcp_engaged_early: boolean | null
+          bcp_license_number: string | null
+          bcp_name: string | null
+          construction_sequence: string | null
+          created_at: string | null
+          decant_plan: string | null
+          disability_specific_scope: string | null
+          general_finishes_scope: string | null
+          id: string
+          quote_1_amount: number | null
+          quote_1_breakdown: string | null
+          quote_1_document_url: string | null
+          quote_1_fixtures: string | null
+          quote_1_gst_inclusive: boolean | null
+          quote_1_provider: string | null
+          quote_2_amount: number | null
+          quote_2_breakdown: string | null
+          quote_2_document_url: string | null
+          quote_2_fixtures: string | null
+          quote_2_gst_inclusive: boolean | null
+          quote_2_provider: string | null
+          scope_of_works: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          assessment_id: string
+          bcp_engaged_early?: boolean | null
+          bcp_license_number?: string | null
+          bcp_name?: string | null
+          construction_sequence?: string | null
+          created_at?: string | null
+          decant_plan?: string | null
+          disability_specific_scope?: string | null
+          general_finishes_scope?: string | null
+          id?: string
+          quote_1_amount?: number | null
+          quote_1_breakdown?: string | null
+          quote_1_document_url?: string | null
+          quote_1_fixtures?: string | null
+          quote_1_gst_inclusive?: boolean | null
+          quote_1_provider?: string | null
+          quote_2_amount?: number | null
+          quote_2_breakdown?: string | null
+          quote_2_document_url?: string | null
+          quote_2_fixtures?: string | null
+          quote_2_gst_inclusive?: boolean | null
+          quote_2_provider?: string | null
+          scope_of_works?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          bcp_engaged_early?: boolean | null
+          bcp_license_number?: string | null
+          bcp_name?: string | null
+          construction_sequence?: string | null
+          created_at?: string | null
+          decant_plan?: string | null
+          disability_specific_scope?: string | null
+          general_finishes_scope?: string | null
+          id?: string
+          quote_1_amount?: number | null
+          quote_1_breakdown?: string | null
+          quote_1_document_url?: string | null
+          quote_1_fixtures?: string | null
+          quote_1_gst_inclusive?: boolean | null
+          quote_1_provider?: string | null
+          quote_2_amount?: number | null
+          quote_2_breakdown?: string | null
+          quote_2_document_url?: string | null
+          quote_2_fixtures?: string | null
+          quote_2_gst_inclusive?: boolean | null
+          quote_2_provider?: string | null
+          scope_of_works?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "builder_collaboration_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clients: {
         Row: {
           created_at: string | null
@@ -170,6 +327,297 @@ export type Database = {
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinical_assessment: {
+        Row: {
+          adl_bathing: string | null
+          adl_community_access: string | null
+          adl_dressing: string | null
+          adl_entry_egress: string | null
+          adl_kitchen: string | null
+          adl_laundry: string | null
+          adl_toileting: string | null
+          adl_vehicle_transfers: string | null
+          assessment_id: string
+          carer_capacity: string | null
+          cognition_status: string | null
+          communication_needs: string | null
+          continence: string | null
+          copm_score: string | null
+          created_at: string | null
+          fatigue_pain: string | null
+          gait_endurance: string | null
+          hoist_needed: boolean | null
+          home_fast_score: string | null
+          id: string
+          knee_clearance: number | null
+          manual_handling_risk: string | null
+          mobility_status: string | null
+          perception_status: string | null
+          pressure_care_needed: boolean | null
+          reach_measurement: number | null
+          safer_home_score: string | null
+          sensory_sensitivities: string | null
+          shoulder_height: number | null
+          single_carer: boolean | null
+          sitting_height: number | null
+          skin_integrity: string | null
+          special_considerations: string | null
+          special_population: string | null
+          standing_height: number | null
+          thermoregulation: string | null
+          toe_clearance: number | null
+          transfer_methods: string | null
+          two_carer_needed: boolean | null
+          updated_at: string | null
+          vision_status: string | null
+          westmead_score: string | null
+          wheelchair_height: number | null
+          wheelchair_length: number | null
+          wheelchair_turning_radius: number | null
+          wheelchair_type: string | null
+          wheelchair_width: number | null
+        }
+        Insert: {
+          adl_bathing?: string | null
+          adl_community_access?: string | null
+          adl_dressing?: string | null
+          adl_entry_egress?: string | null
+          adl_kitchen?: string | null
+          adl_laundry?: string | null
+          adl_toileting?: string | null
+          adl_vehicle_transfers?: string | null
+          assessment_id: string
+          carer_capacity?: string | null
+          cognition_status?: string | null
+          communication_needs?: string | null
+          continence?: string | null
+          copm_score?: string | null
+          created_at?: string | null
+          fatigue_pain?: string | null
+          gait_endurance?: string | null
+          hoist_needed?: boolean | null
+          home_fast_score?: string | null
+          id?: string
+          knee_clearance?: number | null
+          manual_handling_risk?: string | null
+          mobility_status?: string | null
+          perception_status?: string | null
+          pressure_care_needed?: boolean | null
+          reach_measurement?: number | null
+          safer_home_score?: string | null
+          sensory_sensitivities?: string | null
+          shoulder_height?: number | null
+          single_carer?: boolean | null
+          sitting_height?: number | null
+          skin_integrity?: string | null
+          special_considerations?: string | null
+          special_population?: string | null
+          standing_height?: number | null
+          thermoregulation?: string | null
+          toe_clearance?: number | null
+          transfer_methods?: string | null
+          two_carer_needed?: boolean | null
+          updated_at?: string | null
+          vision_status?: string | null
+          westmead_score?: string | null
+          wheelchair_height?: number | null
+          wheelchair_length?: number | null
+          wheelchair_turning_radius?: number | null
+          wheelchair_type?: string | null
+          wheelchair_width?: number | null
+        }
+        Update: {
+          adl_bathing?: string | null
+          adl_community_access?: string | null
+          adl_dressing?: string | null
+          adl_entry_egress?: string | null
+          adl_kitchen?: string | null
+          adl_laundry?: string | null
+          adl_toileting?: string | null
+          adl_vehicle_transfers?: string | null
+          assessment_id?: string
+          carer_capacity?: string | null
+          cognition_status?: string | null
+          communication_needs?: string | null
+          continence?: string | null
+          copm_score?: string | null
+          created_at?: string | null
+          fatigue_pain?: string | null
+          gait_endurance?: string | null
+          hoist_needed?: boolean | null
+          home_fast_score?: string | null
+          id?: string
+          knee_clearance?: number | null
+          manual_handling_risk?: string | null
+          mobility_status?: string | null
+          perception_status?: string | null
+          pressure_care_needed?: boolean | null
+          reach_measurement?: number | null
+          safer_home_score?: string | null
+          sensory_sensitivities?: string | null
+          shoulder_height?: number | null
+          single_carer?: boolean | null
+          sitting_height?: number | null
+          skin_integrity?: string | null
+          special_considerations?: string | null
+          special_population?: string | null
+          standing_height?: number | null
+          thermoregulation?: string | null
+          toe_clearance?: number | null
+          transfer_methods?: string | null
+          two_carer_needed?: boolean | null
+          updated_at?: string | null
+          vision_status?: string | null
+          westmead_score?: string | null
+          wheelchair_height?: number | null
+          wheelchair_length?: number | null
+          wheelchair_turning_radius?: number | null
+          wheelchair_type?: string | null
+          wheelchair_width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_assessment_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      compliance_checklist: {
+        Row: {
+          assessment_id: string
+          compliant: boolean | null
+          created_at: string | null
+          id: string
+          non_compliance_notes: string | null
+          provision_number: string | null
+          remediation_required: string | null
+          requirement_description: string | null
+          standard_reference: string
+          updated_at: string | null
+        }
+        Insert: {
+          assessment_id: string
+          compliant?: boolean | null
+          created_at?: string | null
+          id?: string
+          non_compliance_notes?: string | null
+          provision_number?: string | null
+          remediation_required?: string | null
+          requirement_description?: string | null
+          standard_reference: string
+          updated_at?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          compliant?: boolean | null
+          created_at?: string | null
+          id?: string
+          non_compliance_notes?: string | null
+          provision_number?: string | null
+          remediation_required?: string | null
+          requirement_description?: string | null
+          standard_reference?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "compliance_checklist_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deliverables: {
+        Row: {
+          assessment_id: string
+          at_refit_plan: string | null
+          client_carer_training_plan: string | null
+          clinical_findings: string | null
+          compliance_statement: string | null
+          consent_signed: boolean | null
+          construction_sequencing: string | null
+          created_at: string | null
+          executive_summary: string | null
+          handover_plan: string | null
+          id: string
+          maintenance_notes: string | null
+          measured_drawings_completed: boolean | null
+          ndia_template_completed: boolean | null
+          outcome_measures_results: string | null
+          photos_annotated: boolean | null
+          post_build_fit_check: string | null
+          post_occupancy_measurement_plan: string | null
+          quotes_analysis: string | null
+          risk_register_completed: boolean | null
+          scope_of_works_completed: boolean | null
+          updated_at: string | null
+          vfm_justification: string | null
+        }
+        Insert: {
+          assessment_id: string
+          at_refit_plan?: string | null
+          client_carer_training_plan?: string | null
+          clinical_findings?: string | null
+          compliance_statement?: string | null
+          consent_signed?: boolean | null
+          construction_sequencing?: string | null
+          created_at?: string | null
+          executive_summary?: string | null
+          handover_plan?: string | null
+          id?: string
+          maintenance_notes?: string | null
+          measured_drawings_completed?: boolean | null
+          ndia_template_completed?: boolean | null
+          outcome_measures_results?: string | null
+          photos_annotated?: boolean | null
+          post_build_fit_check?: string | null
+          post_occupancy_measurement_plan?: string | null
+          quotes_analysis?: string | null
+          risk_register_completed?: boolean | null
+          scope_of_works_completed?: boolean | null
+          updated_at?: string | null
+          vfm_justification?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          at_refit_plan?: string | null
+          client_carer_training_plan?: string | null
+          clinical_findings?: string | null
+          compliance_statement?: string | null
+          consent_signed?: boolean | null
+          construction_sequencing?: string | null
+          created_at?: string | null
+          executive_summary?: string | null
+          handover_plan?: string | null
+          id?: string
+          maintenance_notes?: string | null
+          measured_drawings_completed?: boolean | null
+          ndia_template_completed?: boolean | null
+          outcome_measures_results?: string | null
+          photos_annotated?: boolean | null
+          post_build_fit_check?: string | null
+          post_occupancy_measurement_plan?: string | null
+          quotes_analysis?: string | null
+          risk_register_completed?: boolean | null
+          scope_of_works_completed?: boolean | null
+          updated_at?: string | null
+          vfm_justification?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverables_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
             referencedColumns: ["id"]
           },
         ]
@@ -245,6 +693,254 @@ export type Database = {
           },
         ]
       }
+      funding_pathway: {
+        Row: {
+          assessment_id: string
+          category: string | null
+          classification: string | null
+          created_at: string | null
+          estimated_cost: number | null
+          id: string
+          multi_area_works: boolean | null
+          ndia_criteria_alternatives: string | null
+          ndia_criteria_effectiveness: string | null
+          ndia_criteria_goals: string | null
+          ndia_criteria_safety: string | null
+          ndia_criteria_value: string | null
+          permits_required: boolean | null
+          quotes_required: number | null
+          structural_works: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          assessment_id: string
+          category?: string | null
+          classification?: string | null
+          created_at?: string | null
+          estimated_cost?: number | null
+          id?: string
+          multi_area_works?: boolean | null
+          ndia_criteria_alternatives?: string | null
+          ndia_criteria_effectiveness?: string | null
+          ndia_criteria_goals?: string | null
+          ndia_criteria_safety?: string | null
+          ndia_criteria_value?: string | null
+          permits_required?: boolean | null
+          quotes_required?: number | null
+          structural_works?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          category?: string | null
+          classification?: string | null
+          created_at?: string | null
+          estimated_cost?: number | null
+          id?: string
+          multi_area_works?: boolean | null
+          ndia_criteria_alternatives?: string | null
+          ndia_criteria_effectiveness?: string | null
+          ndia_criteria_goals?: string | null
+          ndia_criteria_safety?: string | null
+          ndia_criteria_value?: string | null
+          permits_required?: boolean | null
+          quotes_required?: number | null
+          structural_works?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "funding_pathway_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      measurements: {
+        Row: {
+          assessment_id: string
+          compliant: boolean | null
+          created_at: string | null
+          id: string
+          location: string
+          measurement_type: string
+          notes: string | null
+          photo_urls: string[] | null
+          required_value_mm: number | null
+          standard_reference: string | null
+          updated_at: string | null
+          value_mm: number | null
+        }
+        Insert: {
+          assessment_id: string
+          compliant?: boolean | null
+          created_at?: string | null
+          id?: string
+          location: string
+          measurement_type: string
+          notes?: string | null
+          photo_urls?: string[] | null
+          required_value_mm?: number | null
+          standard_reference?: string | null
+          updated_at?: string | null
+          value_mm?: number | null
+        }
+        Update: {
+          assessment_id?: string
+          compliant?: boolean | null
+          created_at?: string | null
+          id?: string
+          location?: string
+          measurement_type?: string
+          notes?: string | null
+          photo_urls?: string[] | null
+          required_value_mm?: number | null
+          standard_reference?: string | null
+          updated_at?: string | null
+          value_mm?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "measurements_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      options_analysis: {
+        Row: {
+          assessment_id: string
+          buildability: string | null
+          clinical_impact: string | null
+          compliance_notes: string | null
+          created_at: string | null
+          estimated_cost: number | null
+          goal_area: string
+          id: string
+          ndia_alignment: string | null
+          option_description: string | null
+          option_type: string
+          program_estimate: string | null
+          recommended: boolean | null
+          risks: string | null
+          updated_at: string | null
+          value_for_money_justification: string | null
+        }
+        Insert: {
+          assessment_id: string
+          buildability?: string | null
+          clinical_impact?: string | null
+          compliance_notes?: string | null
+          created_at?: string | null
+          estimated_cost?: number | null
+          goal_area: string
+          id?: string
+          ndia_alignment?: string | null
+          option_description?: string | null
+          option_type: string
+          program_estimate?: string | null
+          recommended?: boolean | null
+          risks?: string | null
+          updated_at?: string | null
+          value_for_money_justification?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          buildability?: string | null
+          clinical_impact?: string | null
+          compliance_notes?: string | null
+          created_at?: string | null
+          estimated_cost?: number | null
+          goal_area?: string
+          id?: string
+          ndia_alignment?: string | null
+          option_description?: string | null
+          option_type?: string
+          program_estimate?: string | null
+          recommended?: boolean | null
+          risks?: string | null
+          updated_at?: string | null
+          value_for_money_justification?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "options_analysis_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pre_visit_details: {
+        Row: {
+          approval_pathway: string | null
+          assessment_id: string
+          consent_obtained: boolean | null
+          created_at: string | null
+          current_at_list: string | null
+          diagnoses_prognosis: string | null
+          floor_plans_available: boolean | null
+          id: string
+          landlord_strata_contacts: string | null
+          ndia_template_used: string | null
+          participant_goals: string | null
+          previous_modifications: string | null
+          prior_falls_incidents: string | null
+          referral_reason: string | null
+          tenancy_ownership_details: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          approval_pathway?: string | null
+          assessment_id: string
+          consent_obtained?: boolean | null
+          created_at?: string | null
+          current_at_list?: string | null
+          diagnoses_prognosis?: string | null
+          floor_plans_available?: boolean | null
+          id?: string
+          landlord_strata_contacts?: string | null
+          ndia_template_used?: string | null
+          participant_goals?: string | null
+          previous_modifications?: string | null
+          prior_falls_incidents?: string | null
+          referral_reason?: string | null
+          tenancy_ownership_details?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          approval_pathway?: string | null
+          assessment_id?: string
+          consent_obtained?: boolean | null
+          created_at?: string | null
+          current_at_list?: string | null
+          diagnoses_prognosis?: string | null
+          floor_plans_available?: boolean | null
+          id?: string
+          landlord_strata_contacts?: string | null
+          ndia_template_used?: string | null
+          participant_goals?: string | null
+          previous_modifications?: string | null
+          prior_falls_incidents?: string | null
+          referral_reason?: string | null
+          tenancy_ownership_details?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pre_visit_details_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -274,6 +970,461 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      risks_controls: {
+        Row: {
+          assessment_id: string
+          construction_phase_risks: string | null
+          control_measure: string | null
+          created_at: string | null
+          decanting_plan: string | null
+          home_fast_item: string | null
+          id: string
+          infection_control: string | null
+          lighting_contrast: string | null
+          photo_urls: string[] | null
+          risk_description: string | null
+          risk_type: string
+          safer_home_item: string | null
+          severity: string | null
+          site_security: string | null
+          updated_at: string | null
+          wehsa_item: string | null
+        }
+        Insert: {
+          assessment_id: string
+          construction_phase_risks?: string | null
+          control_measure?: string | null
+          created_at?: string | null
+          decanting_plan?: string | null
+          home_fast_item?: string | null
+          id?: string
+          infection_control?: string | null
+          lighting_contrast?: string | null
+          photo_urls?: string[] | null
+          risk_description?: string | null
+          risk_type: string
+          safer_home_item?: string | null
+          severity?: string | null
+          site_security?: string | null
+          updated_at?: string | null
+          wehsa_item?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          construction_phase_risks?: string | null
+          control_measure?: string | null
+          created_at?: string | null
+          decanting_plan?: string | null
+          home_fast_item?: string | null
+          id?: string
+          infection_control?: string | null
+          lighting_contrast?: string | null
+          photo_urls?: string[] | null
+          risk_description?: string | null
+          risk_type?: string
+          safer_home_item?: string | null
+          severity?: string | null
+          site_security?: string | null
+          updated_at?: string | null
+          wehsa_item?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "risks_controls_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_survey: {
+        Row: {
+          asbestos_likelihood: string | null
+          asbestos_locations: string | null
+          asbestos_testing_required: boolean | null
+          assessment_id: string
+          bathroom_basin_approach: string | null
+          bathroom_falls_to_waste: string | null
+          bathroom_hobless_shower_feasible: boolean | null
+          bathroom_ip_ratings: string | null
+          bathroom_photo_urls: string[] | null
+          bathroom_screen_type: string | null
+          bathroom_slip_resistance: string | null
+          bathroom_toilet_height: number | null
+          bathroom_toilet_setout: string | null
+          bathroom_ventilation: string | null
+          bathroom_wall_reinforcement: boolean | null
+          bedroom_bed_height: number | null
+          bedroom_commode_space: boolean | null
+          bedroom_emergency_egress: boolean | null
+          bedroom_hoist_space: boolean | null
+          bedroom_photo_urls: string[] | null
+          bedroom_transfer_sides: string | null
+          bedroom_wardrobe_reach: string | null
+          board_capacity: string | null
+          comms_intercom: string | null
+          corridors_width: number | null
+          created_at: string | null
+          doors_compliant: boolean | null
+          drainage_adequate: boolean | null
+          entrance_door_clear_opening: number | null
+          entrance_landing_area: string | null
+          entrance_threshold_height: number | null
+          gate_clear_opening: number | null
+          heating_cooling_controls: string | null
+          hot_water_temp_compliant: boolean | null
+          id: string
+          kerb_driveway_gradients: string | null
+          kitchen_aisle_widths: number | null
+          kitchen_bench_heights: number | null
+          kitchen_hob_access: string | null
+          kitchen_knee_clearances: number | null
+          kitchen_oven_access: string | null
+          kitchen_photo_urls: string[] | null
+          kitchen_scald_risk: string | null
+          kitchen_sink_access: string | null
+          kitchen_storage_access: string | null
+          kitchen_task_lighting: string | null
+          laundry_circulation: string | null
+          laundry_drainage: string | null
+          laundry_machine_access: string | null
+          laundry_photo_urls: string[] | null
+          lead_paint_risk: string | null
+          living_control_reaches: string | null
+          living_furniture_layout: string | null
+          living_photo_urls: string[] | null
+          living_seating_heights: string | null
+          living_trip_risks: string | null
+          outdoor_bin_access: string | null
+          outdoor_clothesline_access: string | null
+          outdoor_hardstand: boolean | null
+          outdoor_patio_levels: string | null
+          outdoor_photo_urls: string[] | null
+          outdoor_thresholds: string | null
+          outdoor_weather_drainage: string | null
+          parking_bay_dimensions: string | null
+          path_crossfall: string | null
+          path_gradient: string | null
+          path_width: number | null
+          rcds_present: boolean | null
+          set_down_area: boolean | null
+          site_lighting: string | null
+          smoke_alarms_compliant: boolean | null
+          smoke_alarms_interconnected: boolean | null
+          stairs_handrail_config: string | null
+          stairs_headroom: number | null
+          stairs_landings: string | null
+          stairs_lighting: string | null
+          stairs_nosings: string | null
+          stairs_photo_urls: string[] | null
+          stairs_treads_risers: string | null
+          step_ramp_feasible: boolean | null
+          stormwater_impacts: string | null
+          switches_gpos_heights: string | null
+          tmv_present: boolean | null
+          turning_spaces_adequate: boolean | null
+          updated_at: string | null
+          ventilation_wet_areas: string | null
+          weather_protection: boolean | null
+        }
+        Insert: {
+          asbestos_likelihood?: string | null
+          asbestos_locations?: string | null
+          asbestos_testing_required?: boolean | null
+          assessment_id: string
+          bathroom_basin_approach?: string | null
+          bathroom_falls_to_waste?: string | null
+          bathroom_hobless_shower_feasible?: boolean | null
+          bathroom_ip_ratings?: string | null
+          bathroom_photo_urls?: string[] | null
+          bathroom_screen_type?: string | null
+          bathroom_slip_resistance?: string | null
+          bathroom_toilet_height?: number | null
+          bathroom_toilet_setout?: string | null
+          bathroom_ventilation?: string | null
+          bathroom_wall_reinforcement?: boolean | null
+          bedroom_bed_height?: number | null
+          bedroom_commode_space?: boolean | null
+          bedroom_emergency_egress?: boolean | null
+          bedroom_hoist_space?: boolean | null
+          bedroom_photo_urls?: string[] | null
+          bedroom_transfer_sides?: string | null
+          bedroom_wardrobe_reach?: string | null
+          board_capacity?: string | null
+          comms_intercom?: string | null
+          corridors_width?: number | null
+          created_at?: string | null
+          doors_compliant?: boolean | null
+          drainage_adequate?: boolean | null
+          entrance_door_clear_opening?: number | null
+          entrance_landing_area?: string | null
+          entrance_threshold_height?: number | null
+          gate_clear_opening?: number | null
+          heating_cooling_controls?: string | null
+          hot_water_temp_compliant?: boolean | null
+          id?: string
+          kerb_driveway_gradients?: string | null
+          kitchen_aisle_widths?: number | null
+          kitchen_bench_heights?: number | null
+          kitchen_hob_access?: string | null
+          kitchen_knee_clearances?: number | null
+          kitchen_oven_access?: string | null
+          kitchen_photo_urls?: string[] | null
+          kitchen_scald_risk?: string | null
+          kitchen_sink_access?: string | null
+          kitchen_storage_access?: string | null
+          kitchen_task_lighting?: string | null
+          laundry_circulation?: string | null
+          laundry_drainage?: string | null
+          laundry_machine_access?: string | null
+          laundry_photo_urls?: string[] | null
+          lead_paint_risk?: string | null
+          living_control_reaches?: string | null
+          living_furniture_layout?: string | null
+          living_photo_urls?: string[] | null
+          living_seating_heights?: string | null
+          living_trip_risks?: string | null
+          outdoor_bin_access?: string | null
+          outdoor_clothesline_access?: string | null
+          outdoor_hardstand?: boolean | null
+          outdoor_patio_levels?: string | null
+          outdoor_photo_urls?: string[] | null
+          outdoor_thresholds?: string | null
+          outdoor_weather_drainage?: string | null
+          parking_bay_dimensions?: string | null
+          path_crossfall?: string | null
+          path_gradient?: string | null
+          path_width?: number | null
+          rcds_present?: boolean | null
+          set_down_area?: boolean | null
+          site_lighting?: string | null
+          smoke_alarms_compliant?: boolean | null
+          smoke_alarms_interconnected?: boolean | null
+          stairs_handrail_config?: string | null
+          stairs_headroom?: number | null
+          stairs_landings?: string | null
+          stairs_lighting?: string | null
+          stairs_nosings?: string | null
+          stairs_photo_urls?: string[] | null
+          stairs_treads_risers?: string | null
+          step_ramp_feasible?: boolean | null
+          stormwater_impacts?: string | null
+          switches_gpos_heights?: string | null
+          tmv_present?: boolean | null
+          turning_spaces_adequate?: boolean | null
+          updated_at?: string | null
+          ventilation_wet_areas?: string | null
+          weather_protection?: boolean | null
+        }
+        Update: {
+          asbestos_likelihood?: string | null
+          asbestos_locations?: string | null
+          asbestos_testing_required?: boolean | null
+          assessment_id?: string
+          bathroom_basin_approach?: string | null
+          bathroom_falls_to_waste?: string | null
+          bathroom_hobless_shower_feasible?: boolean | null
+          bathroom_ip_ratings?: string | null
+          bathroom_photo_urls?: string[] | null
+          bathroom_screen_type?: string | null
+          bathroom_slip_resistance?: string | null
+          bathroom_toilet_height?: number | null
+          bathroom_toilet_setout?: string | null
+          bathroom_ventilation?: string | null
+          bathroom_wall_reinforcement?: boolean | null
+          bedroom_bed_height?: number | null
+          bedroom_commode_space?: boolean | null
+          bedroom_emergency_egress?: boolean | null
+          bedroom_hoist_space?: boolean | null
+          bedroom_photo_urls?: string[] | null
+          bedroom_transfer_sides?: string | null
+          bedroom_wardrobe_reach?: string | null
+          board_capacity?: string | null
+          comms_intercom?: string | null
+          corridors_width?: number | null
+          created_at?: string | null
+          doors_compliant?: boolean | null
+          drainage_adequate?: boolean | null
+          entrance_door_clear_opening?: number | null
+          entrance_landing_area?: string | null
+          entrance_threshold_height?: number | null
+          gate_clear_opening?: number | null
+          heating_cooling_controls?: string | null
+          hot_water_temp_compliant?: boolean | null
+          id?: string
+          kerb_driveway_gradients?: string | null
+          kitchen_aisle_widths?: number | null
+          kitchen_bench_heights?: number | null
+          kitchen_hob_access?: string | null
+          kitchen_knee_clearances?: number | null
+          kitchen_oven_access?: string | null
+          kitchen_photo_urls?: string[] | null
+          kitchen_scald_risk?: string | null
+          kitchen_sink_access?: string | null
+          kitchen_storage_access?: string | null
+          kitchen_task_lighting?: string | null
+          laundry_circulation?: string | null
+          laundry_drainage?: string | null
+          laundry_machine_access?: string | null
+          laundry_photo_urls?: string[] | null
+          lead_paint_risk?: string | null
+          living_control_reaches?: string | null
+          living_furniture_layout?: string | null
+          living_photo_urls?: string[] | null
+          living_seating_heights?: string | null
+          living_trip_risks?: string | null
+          outdoor_bin_access?: string | null
+          outdoor_clothesline_access?: string | null
+          outdoor_hardstand?: boolean | null
+          outdoor_patio_levels?: string | null
+          outdoor_photo_urls?: string[] | null
+          outdoor_thresholds?: string | null
+          outdoor_weather_drainage?: string | null
+          parking_bay_dimensions?: string | null
+          path_crossfall?: string | null
+          path_gradient?: string | null
+          path_width?: number | null
+          rcds_present?: boolean | null
+          set_down_area?: boolean | null
+          site_lighting?: string | null
+          smoke_alarms_compliant?: boolean | null
+          smoke_alarms_interconnected?: boolean | null
+          stairs_handrail_config?: string | null
+          stairs_headroom?: number | null
+          stairs_landings?: string | null
+          stairs_lighting?: string | null
+          stairs_nosings?: string | null
+          stairs_photo_urls?: string[] | null
+          stairs_treads_risers?: string | null
+          step_ramp_feasible?: boolean | null
+          stormwater_impacts?: string | null
+          switches_gpos_heights?: string | null
+          tmv_present?: boolean | null
+          turning_spaces_adequate?: boolean | null
+          updated_at?: string | null
+          ventilation_wet_areas?: string | null
+          weather_protection?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_survey_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stakeholders: {
+        Row: {
+          assessment_id: string
+          builder_bcp: string | null
+          created_at: string | null
+          decision_makers: string | null
+          id: string
+          informal_carers: string | null
+          ot_assessor: string | null
+          participant_name: string | null
+          plan_manager: string | null
+          project_manager: string | null
+          support_coordinator: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          assessment_id: string
+          builder_bcp?: string | null
+          created_at?: string | null
+          decision_makers?: string | null
+          id?: string
+          informal_carers?: string | null
+          ot_assessor?: string | null
+          participant_name?: string | null
+          plan_manager?: string | null
+          project_manager?: string | null
+          support_coordinator?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          builder_bcp?: string | null
+          created_at?: string | null
+          decision_makers?: string | null
+          id?: string
+          informal_carers?: string | null
+          ot_assessor?: string | null
+          participant_name?: string | null
+          plan_manager?: string | null
+          project_manager?: string | null
+          support_coordinator?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stakeholders_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      structural_reconnaissance: {
+        Row: {
+          assessment_id: string
+          ceiling_roof_framing: string | null
+          created_at: string | null
+          deflection_tolerances: string | null
+          engineer_notes: string | null
+          engineer_required: boolean | null
+          hoist_load_paths: string | null
+          id: string
+          photo_urls: string[] | null
+          slab_joist_details: string | null
+          stud_layout: string | null
+          updated_at: string | null
+          wall_construction: string | null
+        }
+        Insert: {
+          assessment_id: string
+          ceiling_roof_framing?: string | null
+          created_at?: string | null
+          deflection_tolerances?: string | null
+          engineer_notes?: string | null
+          engineer_required?: boolean | null
+          hoist_load_paths?: string | null
+          id?: string
+          photo_urls?: string[] | null
+          slab_joist_details?: string | null
+          stud_layout?: string | null
+          updated_at?: string | null
+          wall_construction?: string | null
+        }
+        Update: {
+          assessment_id?: string
+          ceiling_roof_framing?: string | null
+          created_at?: string | null
+          deflection_tolerances?: string | null
+          engineer_notes?: string | null
+          engineer_required?: boolean | null
+          hoist_load_paths?: string | null
+          id?: string
+          photo_urls?: string[] | null
+          slab_joist_details?: string | null
+          stud_layout?: string | null
+          updated_at?: string | null
+          wall_construction?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "structural_reconnaissance_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: true
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
