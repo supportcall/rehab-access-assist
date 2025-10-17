@@ -12,6 +12,8 @@ import Clients from "./pages/Clients";
 import Assessments from "./pages/Assessments";
 import AssessmentForm from "./pages/AssessmentForm";
 import Referrals from "./pages/Referrals";
+import AdminDashboard from "./pages/AdminDashboard";
+import PendingApproval from "./pages/PendingApproval";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/pending" element={<PendingApproval />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/assessments" element={<Assessments />} />
           <Route path="/referrals" element={<Referrals />} />

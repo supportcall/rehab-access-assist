@@ -24,11 +24,26 @@ export default function Auth() {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in
+    // Check if user is already logged in and redirect based on role
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate("/dashboard");
+        // Check user role
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id);
+
+        const role = roles?.[0]?.role;
+
+        // Redirect based on role
+        if (role === "pending_ot") {
+          navigate("/pending");
+        } else if (role === "system_admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
       }
     };
     checkUser();
@@ -48,19 +63,36 @@ export default function Auth() {
         throw new Error("Please enter a valid email address");
       }
 
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error, data } = await supabase.auth.signInWithPassword({
         email: loginEmail.trim(),
         password: loginPassword,
       });
 
       if (error) throw error;
 
-      toast({
-        title: "Success",
-        description: "Logged in successfully",
-      });
+      // Check user role and redirect appropriately
+      if (data.user) {
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", data.user.id);
 
-      navigate("/dashboard");
+        const role = roles?.[0]?.role;
+
+        toast({
+          title: "Success",
+          description: "Logged in successfully",
+        });
+
+        // Redirect based on role
+        if (role === "pending_ot") {
+          navigate("/pending");
+        } else if (role === "system_admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      }
     } catch (error: any) {
       toast({
         title: "Error",

@@ -31,6 +31,25 @@ export default function Dashboard() {
         return;
       }
 
+      // Check user role
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id);
+
+      const role = roles?.[0]?.role;
+
+      // Redirect based on role
+      if (role === "pending_ot") {
+        navigate("/pending");
+        return;
+      }
+
+      if (role === "system_admin") {
+        navigate("/admin");
+        return;
+      }
+
       setUser(session.user);
       await loadStats();
       setLoading(false);
