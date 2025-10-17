@@ -13,6 +13,7 @@ import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import logo from "@/assets/enabledc-logo.png";
 
 interface SignupRequest {
   id: string;
@@ -212,6 +213,7 @@ export default function AdminDashboard() {
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
+              <img src={logo} alt="EnabledCare Logo" className="h-10" />
               <div>
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
                 <p className="text-sm text-muted-foreground">System Administration</p>

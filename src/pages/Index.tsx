@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ClipboardCheck, Users, FileText, ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import logo from "@/assets/enabledc-logo.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -17,9 +18,8 @@ const Index = () => {
       />
       <header className="border-b bg-card shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ClipboardCheck className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold">OT Assessment Portal</h1>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="EnabledCare Logo" className="h-10" />
           </div>
           <Button onClick={() => navigate("/auth")}>
             Login / Sign Up

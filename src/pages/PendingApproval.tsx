@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import logo from "@/assets/enabledc-logo.png";
 
 interface SignupRequest {
   id: string;
@@ -142,7 +143,10 @@ export default function PendingApproval() {
       <div className="min-h-screen flex flex-col bg-background">
         <header className="border-b bg-card">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="EnabledCare Logo" className="h-10" />
+              <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
+            </div>
             <Button variant="ghost" onClick={handleSignOut} className="flex items-center gap-2">
               <LogOut className="h-4 w-4" />
               Sign Out

@@ -11,6 +11,7 @@ import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import logo from "@/assets/enabledc-logo.png";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -177,11 +178,16 @@ export default function Auth() {
           ← Back to Home
         </Button>
         <Card className="w-full">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">OT Assessment Portal</CardTitle>
-          <CardDescription>
-            Occupational Therapy Environmental Assessment System
-          </CardDescription>
+        <CardHeader className="space-y-4">
+          <div className="flex justify-center">
+            <img src={logo} alt="EnabledCare Logo" className="h-16" />
+          </div>
+          <div className="space-y-1 text-center">
+            <CardTitle className="text-2xl font-bold">OT Assessment Portal</CardTitle>
+            <CardDescription>
+              Occupational Therapy Environmental Assessment System
+            </CardDescription>
+          </div>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="login" className="w-full">

@@ -8,6 +8,7 @@ import { Plus, FileText, User as UserIcon, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
+import logo from "@/assets/enabledc-logo.png";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -119,16 +120,19 @@ export default function Dashboard() {
       />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
-            <p className="text-sm text-muted-foreground">
-              Welcome, {user?.user_metadata?.first_name || user?.email}
-            </p>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="EnabledCare Logo" className="h-12" />
+            <div>
+              <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
+              <p className="text-sm text-muted-foreground">
+                Welcome, {user?.user_metadata?.first_name || user?.email}
+              </p>
             {systemId && (
               <p className="text-sm font-mono text-primary mt-1">
-                Your OT ID: {systemId}
+                System ID: {systemId}
               </p>
             )}
+            </div>
           </div>
           <Button variant="ghost" onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
