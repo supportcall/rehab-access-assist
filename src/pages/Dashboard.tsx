@@ -144,7 +144,7 @@ export default function Dashboard() {
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-6 md:grid-cols-3 mb-8">
           <Card 
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-primary/5 border-primary/20"
+            className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/clients")}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -157,7 +157,7 @@ export default function Dashboard() {
           </Card>
 
           <Card 
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-primary/5 border-primary/20"
+            className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/assessments")}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -170,7 +170,7 @@ export default function Dashboard() {
           </Card>
 
           <Card 
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-primary/5 border-primary/20"
+            className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/assessments")}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -183,7 +183,7 @@ export default function Dashboard() {
           </Card>
 
           <Card 
-            className="cursor-pointer hover:shadow-lg transition-shadow bg-primary/5 border-primary/20"
+            className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/referrals")}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -197,7 +197,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-          <Card className="md:col-span-2 lg:col-span-4 bg-primary/5 border-primary/20">
+          <Card className="md:col-span-2 lg:col-span-4">
             <CardHeader>
               <CardTitle>Your System ID</CardTitle>
               <CardDescription>Share this ID with patients to receive referrals</CardDescription>
@@ -226,7 +226,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <Card className="bg-primary/5 border-primary/20">
+          <Card>
             <CardHeader>
               <CardTitle>Quick Actions</CardTitle>
               <CardDescription>Start a new assessment or manage clients</CardDescription>
@@ -266,7 +266,7 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-primary/5 border-primary/20">
+          <Card>
             <CardHeader>
               <CardTitle>System Information</CardTitle>
               <CardDescription>About this assessment tool</CardDescription>
