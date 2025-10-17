@@ -101,6 +101,42 @@ export default function Referrals() {
     }
   };
 
+  const handleAccept = async (referralId: string, clientId: string) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      // Update referral status to accepted
+      const { error: referralError } = await supabase
+        .from("referrals")
+        .update({ status: "accepted" })
+        .eq("id", referralId);
+
+      if (referralError) throw referralError;
+
+      // Assign the client to the current OT
+      const { error: clientError } = await supabase
+        .from("clients")
+        .update({ assigned_ot_id: user.id })
+        .eq("id", clientId);
+
+      if (clientError) throw clientError;
+
+      toast({
+        title: "Referral Accepted",
+        description: "Client has been assigned to you",
+      });
+
+      await loadReferrals();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: getSafeErrorMessage(error),
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleReject = async (referralId: string) => {
     try {
       // Validate rejection notes
