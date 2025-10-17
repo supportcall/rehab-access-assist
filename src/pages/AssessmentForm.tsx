@@ -752,6 +752,7 @@ export default function AssessmentForm() {
               <StageSix
                 atAuditData={atAuditData}
                 setAtAuditData={setAtAuditData}
+                assessmentId={assessmentId}
               />
             )}
 
@@ -763,6 +764,7 @@ export default function AssessmentForm() {
                 setStructuralData={setStructuralData}
                 measurements={measurements}
                 setMeasurements={setMeasurements}
+                assessmentId={assessmentId}
               />
             )}
 
@@ -772,6 +774,7 @@ export default function AssessmentForm() {
                 setRisksData={setRisksData}
                 optionsData={optionsData}
                 setOptionsData={setOptionsData}
+                assessmentId={assessmentId}
               />
             )}
 

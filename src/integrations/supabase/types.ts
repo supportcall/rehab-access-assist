@@ -139,7 +139,7 @@ export type Database = {
           current_at_type: string | null
           id: string
           maneuvering_envelopes: string | null
-          photo_urls: string[] | null
+          photo_urls: Json | null
           power_requirements: string | null
           storage_requirements: string | null
           structural_works_justification: string | null
@@ -158,7 +158,7 @@ export type Database = {
           current_at_type?: string | null
           id?: string
           maneuvering_envelopes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           power_requirements?: string | null
           storage_requirements?: string | null
           structural_works_justification?: string | null
@@ -177,7 +177,7 @@ export type Database = {
           current_at_type?: string | null
           id?: string
           maneuvering_envelopes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           power_requirements?: string | null
           storage_requirements?: string | null
           structural_works_justification?: string | null
@@ -658,7 +658,7 @@ export type Database = {
           door_clear_width: number | null
           id: string
           notes: string | null
-          photo_urls: string[] | null
+          photo_urls: Json | null
           ramp_gradient_going: number | null
           ramp_gradient_riser: number | null
           threshold_height: number | null
@@ -678,7 +678,7 @@ export type Database = {
           door_clear_width?: number | null
           id?: string
           notes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           ramp_gradient_going?: number | null
           ramp_gradient_riser?: number | null
           threshold_height?: number | null
@@ -698,7 +698,7 @@ export type Database = {
           door_clear_width?: number | null
           id?: string
           notes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           ramp_gradient_going?: number | null
           ramp_gradient_riser?: number | null
           threshold_height?: number | null
@@ -793,7 +793,7 @@ export type Database = {
           location: string
           measurement_type: string
           notes: string | null
-          photo_urls: string[] | null
+          photo_urls: Json | null
           required_value_mm: number | null
           standard_reference: string | null
           updated_at: string | null
@@ -807,7 +807,7 @@ export type Database = {
           location: string
           measurement_type: string
           notes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           required_value_mm?: number | null
           standard_reference?: string | null
           updated_at?: string | null
@@ -821,7 +821,7 @@ export type Database = {
           location?: string
           measurement_type?: string
           notes?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           required_value_mm?: number | null
           standard_reference?: string | null
           updated_at?: string | null
@@ -1127,7 +1127,7 @@ export type Database = {
           id: string
           infection_control: string | null
           lighting_contrast: string | null
-          photo_urls: string[] | null
+          photo_urls: Json | null
           risk_description: string | null
           risk_type: string
           safer_home_item: string | null
@@ -1146,7 +1146,7 @@ export type Database = {
           id?: string
           infection_control?: string | null
           lighting_contrast?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           risk_description?: string | null
           risk_type: string
           safer_home_item?: string | null
@@ -1165,7 +1165,7 @@ export type Database = {
           id?: string
           infection_control?: string | null
           lighting_contrast?: string | null
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           risk_description?: string | null
           risk_type?: string
           safer_home_item?: string | null
@@ -1194,7 +1194,7 @@ export type Database = {
           bathroom_falls_to_waste: string | null
           bathroom_hobless_shower_feasible: boolean | null
           bathroom_ip_ratings: string | null
-          bathroom_photo_urls: string[] | null
+          bathroom_photo_urls: Json | null
           bathroom_screen_type: string | null
           bathroom_slip_resistance: string | null
           bathroom_toilet_height: number | null
@@ -1205,7 +1205,7 @@ export type Database = {
           bedroom_commode_space: boolean | null
           bedroom_emergency_egress: boolean | null
           bedroom_hoist_space: boolean | null
-          bedroom_photo_urls: string[] | null
+          bedroom_photo_urls: Json | null
           bedroom_transfer_sides: string | null
           bedroom_wardrobe_reach: string | null
           board_capacity: string | null
@@ -1227,7 +1227,7 @@ export type Database = {
           kitchen_hob_access: string | null
           kitchen_knee_clearances: number | null
           kitchen_oven_access: string | null
-          kitchen_photo_urls: string[] | null
+          kitchen_photo_urls: Json | null
           kitchen_scald_risk: string | null
           kitchen_sink_access: string | null
           kitchen_storage_access: string | null
@@ -1235,18 +1235,18 @@ export type Database = {
           laundry_circulation: string | null
           laundry_drainage: string | null
           laundry_machine_access: string | null
-          laundry_photo_urls: string[] | null
+          laundry_photo_urls: Json | null
           lead_paint_risk: string | null
           living_control_reaches: string | null
           living_furniture_layout: string | null
-          living_photo_urls: string[] | null
+          living_photo_urls: Json | null
           living_seating_heights: string | null
           living_trip_risks: string | null
           outdoor_bin_access: string | null
           outdoor_clothesline_access: string | null
           outdoor_hardstand: boolean | null
           outdoor_patio_levels: string | null
-          outdoor_photo_urls: string[] | null
+          outdoor_photo_urls: Json | null
           outdoor_thresholds: string | null
           outdoor_weather_drainage: string | null
           parking_bay_dimensions: string | null
@@ -1263,7 +1263,7 @@ export type Database = {
           stairs_landings: string | null
           stairs_lighting: string | null
           stairs_nosings: string | null
-          stairs_photo_urls: string[] | null
+          stairs_photo_urls: Json | null
           stairs_treads_risers: string | null
           step_ramp_feasible: boolean | null
           stormwater_impacts: string | null
@@ -1283,7 +1283,7 @@ export type Database = {
           bathroom_falls_to_waste?: string | null
           bathroom_hobless_shower_feasible?: boolean | null
           bathroom_ip_ratings?: string | null
-          bathroom_photo_urls?: string[] | null
+          bathroom_photo_urls?: Json | null
           bathroom_screen_type?: string | null
           bathroom_slip_resistance?: string | null
           bathroom_toilet_height?: number | null
@@ -1294,7 +1294,7 @@ export type Database = {
           bedroom_commode_space?: boolean | null
           bedroom_emergency_egress?: boolean | null
           bedroom_hoist_space?: boolean | null
-          bedroom_photo_urls?: string[] | null
+          bedroom_photo_urls?: Json | null
           bedroom_transfer_sides?: string | null
           bedroom_wardrobe_reach?: string | null
           board_capacity?: string | null
@@ -1316,7 +1316,7 @@ export type Database = {
           kitchen_hob_access?: string | null
           kitchen_knee_clearances?: number | null
           kitchen_oven_access?: string | null
-          kitchen_photo_urls?: string[] | null
+          kitchen_photo_urls?: Json | null
           kitchen_scald_risk?: string | null
           kitchen_sink_access?: string | null
           kitchen_storage_access?: string | null
@@ -1324,18 +1324,18 @@ export type Database = {
           laundry_circulation?: string | null
           laundry_drainage?: string | null
           laundry_machine_access?: string | null
-          laundry_photo_urls?: string[] | null
+          laundry_photo_urls?: Json | null
           lead_paint_risk?: string | null
           living_control_reaches?: string | null
           living_furniture_layout?: string | null
-          living_photo_urls?: string[] | null
+          living_photo_urls?: Json | null
           living_seating_heights?: string | null
           living_trip_risks?: string | null
           outdoor_bin_access?: string | null
           outdoor_clothesline_access?: string | null
           outdoor_hardstand?: boolean | null
           outdoor_patio_levels?: string | null
-          outdoor_photo_urls?: string[] | null
+          outdoor_photo_urls?: Json | null
           outdoor_thresholds?: string | null
           outdoor_weather_drainage?: string | null
           parking_bay_dimensions?: string | null
@@ -1352,7 +1352,7 @@ export type Database = {
           stairs_landings?: string | null
           stairs_lighting?: string | null
           stairs_nosings?: string | null
-          stairs_photo_urls?: string[] | null
+          stairs_photo_urls?: Json | null
           stairs_treads_risers?: string | null
           step_ramp_feasible?: boolean | null
           stormwater_impacts?: string | null
@@ -1372,7 +1372,7 @@ export type Database = {
           bathroom_falls_to_waste?: string | null
           bathroom_hobless_shower_feasible?: boolean | null
           bathroom_ip_ratings?: string | null
-          bathroom_photo_urls?: string[] | null
+          bathroom_photo_urls?: Json | null
           bathroom_screen_type?: string | null
           bathroom_slip_resistance?: string | null
           bathroom_toilet_height?: number | null
@@ -1383,7 +1383,7 @@ export type Database = {
           bedroom_commode_space?: boolean | null
           bedroom_emergency_egress?: boolean | null
           bedroom_hoist_space?: boolean | null
-          bedroom_photo_urls?: string[] | null
+          bedroom_photo_urls?: Json | null
           bedroom_transfer_sides?: string | null
           bedroom_wardrobe_reach?: string | null
           board_capacity?: string | null
@@ -1405,7 +1405,7 @@ export type Database = {
           kitchen_hob_access?: string | null
           kitchen_knee_clearances?: number | null
           kitchen_oven_access?: string | null
-          kitchen_photo_urls?: string[] | null
+          kitchen_photo_urls?: Json | null
           kitchen_scald_risk?: string | null
           kitchen_sink_access?: string | null
           kitchen_storage_access?: string | null
@@ -1413,18 +1413,18 @@ export type Database = {
           laundry_circulation?: string | null
           laundry_drainage?: string | null
           laundry_machine_access?: string | null
-          laundry_photo_urls?: string[] | null
+          laundry_photo_urls?: Json | null
           lead_paint_risk?: string | null
           living_control_reaches?: string | null
           living_furniture_layout?: string | null
-          living_photo_urls?: string[] | null
+          living_photo_urls?: Json | null
           living_seating_heights?: string | null
           living_trip_risks?: string | null
           outdoor_bin_access?: string | null
           outdoor_clothesline_access?: string | null
           outdoor_hardstand?: boolean | null
           outdoor_patio_levels?: string | null
-          outdoor_photo_urls?: string[] | null
+          outdoor_photo_urls?: Json | null
           outdoor_thresholds?: string | null
           outdoor_weather_drainage?: string | null
           parking_bay_dimensions?: string | null
@@ -1441,7 +1441,7 @@ export type Database = {
           stairs_landings?: string | null
           stairs_lighting?: string | null
           stairs_nosings?: string | null
-          stairs_photo_urls?: string[] | null
+          stairs_photo_urls?: Json | null
           stairs_treads_risers?: string | null
           step_ramp_feasible?: boolean | null
           stormwater_impacts?: string | null
@@ -1525,7 +1525,7 @@ export type Database = {
           engineer_required: boolean | null
           hoist_load_paths: string | null
           id: string
-          photo_urls: string[] | null
+          photo_urls: Json | null
           slab_joist_details: string | null
           stud_layout: string | null
           updated_at: string | null
@@ -1540,7 +1540,7 @@ export type Database = {
           engineer_required?: boolean | null
           hoist_load_paths?: string | null
           id?: string
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           slab_joist_details?: string | null
           stud_layout?: string | null
           updated_at?: string | null
@@ -1555,7 +1555,7 @@ export type Database = {
           engineer_required?: boolean | null
           hoist_load_paths?: string | null
           id?: string
-          photo_urls?: string[] | null
+          photo_urls?: Json | null
           slab_joist_details?: string | null
           stud_layout?: string | null
           updated_at?: string | null

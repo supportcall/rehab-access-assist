@@ -3,13 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import PhotoUpload from "./PhotoUpload";
 
 interface StageSixProps {
   atAuditData: any;
   setAtAuditData: (data: any) => void;
+  assessmentId?: string | null;
 }
 
-export default function StageSix({ atAuditData, setAtAuditData }: StageSixProps) {
+export default function StageSix({ atAuditData, setAtAuditData, assessmentId }: StageSixProps) {
   const updateField = (field: string, value: any) => {
     setAtAuditData({ ...atAuditData, [field]: value });
   };
@@ -69,6 +71,14 @@ export default function StageSix({ atAuditData, setAtAuditData }: StageSixProps)
             <Label>Maneuvering Envelopes</Label>
             <Textarea value={atAuditData.maneuvering_envelopes || ""} onChange={(e) => updateField("maneuvering_envelopes", e.target.value)} rows={2} placeholder="Describe clearances needed with AT (wheelchair, shower commode, hoist)" />
           </div>
+
+          <PhotoUpload
+            photos={atAuditData.photo_urls || []}
+            onPhotosChange={(photos) => updateField("photo_urls", photos)}
+            bucketPath={`at-audit/${assessmentId || "temp"}`}
+            label="AT Equipment Photos"
+            maxPhotos={15}
+          />
         </CardContent>
       </Card>
     </div>

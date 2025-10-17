@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Trash2 } from "lucide-react";
+import PhotoUpload from "./PhotoUpload";
 
 interface StageSevenProps {
   siteSurveyData: any;
@@ -13,9 +14,10 @@ interface StageSevenProps {
   setStructuralData: (data: any) => void;
   measurements: any[];
   setMeasurements: (data: any[]) => void;
+  assessmentId?: string | null;
 }
 
-export default function StageSeven({ siteSurveyData, setSiteSurveyData, structuralData, setStructuralData, measurements, setMeasurements }: StageSevenProps) {
+export default function StageSeven({ siteSurveyData, setSiteSurveyData, structuralData, setStructuralData, measurements, setMeasurements, assessmentId }: StageSevenProps) {
   const updateSiteSurvey = (field: string, value: any) => {
     setSiteSurveyData({ ...siteSurveyData, [field]: value });
   };
@@ -129,6 +131,88 @@ export default function StageSeven({ siteSurveyData, setSiteSurveyData, structur
             <Checkbox checked={siteSurveyData.asbestos_testing_required || false} onCheckedChange={(checked) => updateSiteSurvey("asbestos_testing_required", checked)} />
             <Label>Asbestos Testing Required</Label>
           </div>
+
+          <PhotoUpload
+            photos={siteSurveyData.outdoor_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("outdoor_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/outdoor`}
+            label="Outdoor & Entry Photos"
+            maxPhotos={20}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Bathroom Assessment</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <PhotoUpload
+            photos={siteSurveyData.bathroom_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("bathroom_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/bathroom`}
+            label="Bathroom Photos"
+            maxPhotos={15}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Kitchen Assessment</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <PhotoUpload
+            photos={siteSurveyData.kitchen_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("kitchen_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/kitchen`}
+            label="Kitchen Photos"
+            maxPhotos={10}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Bedroom & Living Areas</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <PhotoUpload
+            photos={siteSurveyData.bedroom_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("bedroom_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/bedroom`}
+            label="Bedroom Photos"
+            maxPhotos={10}
+          />
+          <PhotoUpload
+            photos={siteSurveyData.living_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("living_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/living`}
+            label="Living Area Photos"
+            maxPhotos={10}
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Stairs & Laundry</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <PhotoUpload
+            photos={siteSurveyData.stairs_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("stairs_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/stairs`}
+            label="Stairs Photos"
+            maxPhotos={10}
+          />
+          <PhotoUpload
+            photos={siteSurveyData.laundry_photo_urls || []}
+            onPhotosChange={(photos) => updateSiteSurvey("laundry_photo_urls", photos)}
+            bucketPath={`site-survey/${assessmentId || "temp"}/laundry`}
+            label="Laundry Photos"
+            maxPhotos={5}
+          />
         </CardContent>
       </Card>
 
@@ -147,6 +231,14 @@ export default function StageSeven({ siteSurveyData, setSiteSurveyData, structur
             <Checkbox checked={structuralData.engineer_required || false} onCheckedChange={(checked) => updateStructural("engineer_required", checked)} />
             <Label>Engineer Required</Label>
           </div>
+
+          <PhotoUpload
+            photos={structuralData.photo_urls || []}
+            onPhotosChange={(photos) => updateStructural("photo_urls", photos)}
+            bucketPath={`structural/${assessmentId || "temp"}`}
+            label="Structural Photos"
+            maxPhotos={15}
+          />
         </CardContent>
       </Card>
 
@@ -192,6 +284,14 @@ export default function StageSeven({ siteSurveyData, setSiteSurveyData, structur
                   <Checkbox checked={m.compliant || false} onCheckedChange={(checked) => updateMeasurement(index, "compliant", checked)} />
                   <Label>Compliant</Label>
                 </div>
+
+                <PhotoUpload
+                  photos={m.photo_urls || []}
+                  onPhotosChange={(photos) => updateMeasurement(index, "photo_urls", photos)}
+                  bucketPath={`measurements/${assessmentId || "temp"}/${index}`}
+                  label="Measurement Photos"
+                  maxPhotos={3}
+                />
               </CardContent>
             </Card>
           ))}

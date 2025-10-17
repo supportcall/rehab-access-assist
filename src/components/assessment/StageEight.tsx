@@ -5,15 +5,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Trash2 } from "lucide-react";
+import PhotoUpload from "./PhotoUpload";
 
 interface StageEightProps {
   risksData: any[];
   setRisksData: (data: any[]) => void;
   optionsData: any[];
   setOptionsData: (data: any[]) => void;
+  assessmentId?: string | null;
 }
 
-export default function StageEight({ risksData, setRisksData, optionsData, setOptionsData }: StageEightProps) {
+export default function StageEight({ risksData, setRisksData, optionsData, setOptionsData, assessmentId }: StageEightProps) {
   const addRisk = () => {
     setRisksData([...risksData, { risk_type: "", risk_description: "", severity: "medium", control_measure: "", home_fast_item: "", safer_home_item: "", wehsa_item: "" }]);
   };
@@ -114,6 +116,14 @@ export default function StageEight({ risksData, setRisksData, optionsData, setOp
                       <Input value={risk.wehsa_item || ""} onChange={(e) => updateRisk(index, "wehsa_item", e.target.value)} />
                     </div>
                   </div>
+
+                  <PhotoUpload
+                    photos={risk.photo_urls || []}
+                    onPhotosChange={(photos) => updateRisk(index, "photo_urls", photos)}
+                    bucketPath={`risks/${assessmentId || "temp"}/${index}`}
+                    label="Risk Documentation Photos"
+                    maxPhotos={5}
+                  />
                 </CardContent>
               </Card>
             ))

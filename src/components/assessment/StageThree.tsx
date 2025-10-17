@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import PhotoUpload from "./PhotoUpload";
 
 interface StageThreeProps {
   assessmentId: string | null;
@@ -152,6 +153,14 @@ export default function StageThree({ assessmentId, environmentalAreas, setEnviro
                     rows={2}
                   />
                 </div>
+
+                <PhotoUpload
+                  photos={area.photo_urls || []}
+                  onPhotosChange={(photos) => updateArea(index, "photo_urls", photos)}
+                  bucketPath={`environmental-areas/${assessmentId || "temp"}/${index}`}
+                  label="Area Photos"
+                  maxPhotos={10}
+                />
               </CardContent>
             </Card>
           ))}
