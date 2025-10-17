@@ -137,6 +137,101 @@ export default function AssessmentForm() {
           near_miss_locations: data.near_miss_locations || "",
         });
         setEnvironmentalAreas(data.environmental_areas || []);
+
+        // Load Stage 4 - Clinical Assessment
+        const { data: clinical } = await supabase
+          .from("clinical_assessment")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (clinical) setClinicalData(clinical);
+
+        // Load Stage 5 - Pre-visit, Stakeholders, Funding
+        const { data: preVisit } = await supabase
+          .from("pre_visit_details")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (preVisit) setPreVisitData(preVisit);
+
+        const { data: stakeholders } = await supabase
+          .from("stakeholders")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (stakeholders) setStakeholdersData(stakeholders);
+
+        const { data: funding } = await supabase
+          .from("funding_pathway")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (funding) setFundingData(funding);
+
+        // Load Stage 6 - AT Audit
+        const { data: atAudit } = await supabase
+          .from("at_audit")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (atAudit) setAtAuditData(atAudit);
+
+        // Load Stage 7 - Site Survey, Structural, Measurements
+        const { data: siteSurvey } = await supabase
+          .from("site_survey")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (siteSurvey) setSiteSurveyData(siteSurvey);
+
+        const { data: structural } = await supabase
+          .from("structural_reconnaissance")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (structural) setStructuralData(structural);
+
+        const { data: measurementsData } = await supabase
+          .from("measurements")
+          .select("*")
+          .eq("assessment_id", assessmentId);
+        if (measurementsData) setMeasurements(measurementsData);
+
+        // Load Stage 8 - Risks & Options
+        const { data: risksControlsData } = await supabase
+          .from("risks_controls")
+          .select("*")
+          .eq("assessment_id", assessmentId);
+        if (risksControlsData) setRisksData(risksControlsData);
+
+        const { data: optionsAnalysisData } = await supabase
+          .from("options_analysis")
+          .select("*")
+          .eq("assessment_id", assessmentId);
+        if (optionsAnalysisData) setOptionsData(optionsAnalysisData);
+
+        // Load Stage 9 - Compliance
+        const { data: complianceChecklistData } = await supabase
+          .from("compliance_checklist")
+          .select("*")
+          .eq("assessment_id", assessmentId);
+        if (complianceChecklistData) setComplianceData(complianceChecklistData);
+
+        // Load Stage 10 - Builder Collaboration
+        const { data: builder } = await supabase
+          .from("builder_collaboration")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (builder) setBuilderData(builder);
+
+        // Load Stage 11 - Deliverables
+        const { data: deliverables } = await supabase
+          .from("deliverables")
+          .select("*")
+          .eq("assessment_id", assessmentId)
+          .maybeSingle();
+        if (deliverables) setDeliverablesData(deliverables);
       }
     } catch (error: any) {
       toast({
@@ -216,28 +311,275 @@ export default function AssessmentForm() {
         setAssessmentId(data.id);
       }
 
-      // Save environmental areas
-      if (savedAssessmentId && environmentalAreas.length > 0) {
+      if (!savedAssessmentId) throw new Error("Failed to save assessment");
+
+      // Save environmental areas (Stage 3)
+      if (environmentalAreas.length > 0) {
         for (const area of environmentalAreas) {
           if (area.id) {
-            // Update existing area
             const { error } = await supabase
               .from("environmental_areas")
               .update(area)
               .eq("id", area.id);
-
             if (error) throw error;
           } else {
-            // Create new area
             const { error } = await supabase
               .from("environmental_areas")
-              .insert({
-                ...area,
-                assessment_id: savedAssessmentId,
-              });
-
+              .insert({ ...area, assessment_id: savedAssessmentId });
             if (error) throw error;
           }
+        }
+      }
+
+      // Save Stage 4 - Clinical Assessment
+      if (Object.keys(clinicalData).length > 0) {
+        const { data: existing } = await supabase
+          .from("clinical_assessment")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("clinical_assessment")
+            .update(clinicalData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("clinical_assessment")
+            .insert({ ...clinicalData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 5 - Pre-visit Details
+      if (Object.keys(preVisitData).length > 0) {
+        const { data: existing } = await supabase
+          .from("pre_visit_details")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("pre_visit_details")
+            .update(preVisitData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("pre_visit_details")
+            .insert({ ...preVisitData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 5 - Stakeholders
+      if (Object.keys(stakeholdersData).length > 0) {
+        const { data: existing } = await supabase
+          .from("stakeholders")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("stakeholders")
+            .update(stakeholdersData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("stakeholders")
+            .insert({ ...stakeholdersData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 5 - Funding Pathway
+      if (Object.keys(fundingData).length > 0) {
+        const { data: existing } = await supabase
+          .from("funding_pathway")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("funding_pathway")
+            .update(fundingData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("funding_pathway")
+            .insert({ ...fundingData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 6 - AT Audit
+      if (Object.keys(atAuditData).length > 0) {
+        const { data: existing } = await supabase
+          .from("at_audit")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("at_audit")
+            .update(atAuditData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("at_audit")
+            .insert({ ...atAuditData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 7 - Site Survey
+      if (Object.keys(siteSurveyData).length > 0) {
+        const { data: existing } = await supabase
+          .from("site_survey")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("site_survey")
+            .update(siteSurveyData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("site_survey")
+            .insert({ ...siteSurveyData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 7 - Structural Reconnaissance
+      if (Object.keys(structuralData).length > 0) {
+        const { data: existing } = await supabase
+          .from("structural_reconnaissance")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("structural_reconnaissance")
+            .update(structuralData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("structural_reconnaissance")
+            .insert({ ...structuralData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 7 - Measurements
+      if (measurements.length > 0) {
+        // Delete existing measurements first
+        await supabase
+          .from("measurements")
+          .delete()
+          .eq("assessment_id", savedAssessmentId);
+
+        // Insert all measurements
+        const { error } = await supabase
+          .from("measurements")
+          .insert(measurements.map(m => ({ ...m, assessment_id: savedAssessmentId })));
+        if (error) throw error;
+      }
+
+      // Save Stage 8 - Risks & Controls
+      if (risksData.length > 0) {
+        await supabase
+          .from("risks_controls")
+          .delete()
+          .eq("assessment_id", savedAssessmentId);
+
+        const { error } = await supabase
+          .from("risks_controls")
+          .insert(risksData.map(r => ({ ...r, assessment_id: savedAssessmentId })));
+        if (error) throw error;
+      }
+
+      // Save Stage 8 - Options Analysis
+      if (optionsData.length > 0) {
+        await supabase
+          .from("options_analysis")
+          .delete()
+          .eq("assessment_id", savedAssessmentId);
+
+        const { error } = await supabase
+          .from("options_analysis")
+          .insert(optionsData.map(o => ({ ...o, assessment_id: savedAssessmentId })));
+        if (error) throw error;
+      }
+
+      // Save Stage 9 - Compliance Checklist
+      if (complianceData.length > 0) {
+        await supabase
+          .from("compliance_checklist")
+          .delete()
+          .eq("assessment_id", savedAssessmentId);
+
+        const { error } = await supabase
+          .from("compliance_checklist")
+          .insert(complianceData.map(c => ({ ...c, assessment_id: savedAssessmentId })));
+        if (error) throw error;
+      }
+
+      // Save Stage 10 - Builder Collaboration
+      if (Object.keys(builderData).length > 0) {
+        const { data: existing } = await supabase
+          .from("builder_collaboration")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("builder_collaboration")
+            .update(builderData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("builder_collaboration")
+            .insert({ ...builderData, assessment_id: savedAssessmentId });
+          if (error) throw error;
+        }
+      }
+
+      // Save Stage 11 - Deliverables
+      if (Object.keys(deliverablesData).length > 0) {
+        const { data: existing } = await supabase
+          .from("deliverables")
+          .select("id")
+          .eq("assessment_id", savedAssessmentId)
+          .maybeSingle();
+
+        if (existing) {
+          const { error } = await supabase
+            .from("deliverables")
+            .update(deliverablesData)
+            .eq("assessment_id", savedAssessmentId);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("deliverables")
+            .insert({ ...deliverablesData, assessment_id: savedAssessmentId });
+          if (error) throw error;
         }
       }
 
