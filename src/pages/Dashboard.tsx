@@ -4,11 +4,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, FileText, User as UserIcon, LogOut } from "lucide-react";
+import { Plus, FileText, User as UserIcon, LogOut, Settings } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import logo from "@/assets/enabledc-logo.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -16,6 +26,12 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [systemId, setSystemId] = useState<string>("");
+  const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
+  const [profileData, setProfileData] = useState({
+    aphra_registration_number: "",
+    mobile_number: "",
+    phone: "",
+  });
   const [stats, setStats] = useState({
     totalClients: 0,
     totalAssessments: 0,
@@ -73,7 +89,7 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser();
       
       const [profileRes, clientsRes, assessmentsRes, draftRes, referralsRes] = await Promise.all([
-        supabase.from("profiles").select("system_id").eq("id", user?.id).maybeSingle(),
+        supabase.from("profiles").select("system_id, aphra_registration_number, mobile_number, phone").eq("id", user?.id).maybeSingle(),
         supabase.from("clients").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }).eq("status", "draft"),
@@ -82,6 +98,11 @@ export default function Dashboard() {
 
       if (profileRes.data?.system_id) {
         setSystemId(profileRes.data.system_id);
+        setProfileData({
+          aphra_registration_number: profileRes.data.aphra_registration_number || "",
+          mobile_number: profileRes.data.mobile_number || "",
+          phone: profileRes.data.phone || "",
+        });
       }
 
       setStats({
@@ -92,6 +113,38 @@ export default function Dashboard() {
       });
     } catch (error) {
       console.error("Error loading stats:", error);
+    }
+  };
+
+  const handleProfileUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          aphra_registration_number: profileData.aphra_registration_number?.trim() || null,
+          mobile_number: profileData.mobile_number?.trim() || null,
+          phone: profileData.phone?.trim() || null,
+        })
+        .eq("id", user?.id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Profile updated",
+        description: "Your profile has been updated successfully",
+      });
+      
+      setIsProfileDialogOpen(false);
+      await loadStats();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update profile",
+        variant: "destructive",
+      });
     }
   };
 
@@ -134,10 +187,76 @@ export default function Dashboard() {
             )}
             </div>
           </div>
-          <Button variant="ghost" onClick={handleLogout} aria-label="Logout from portal">
-            <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
-            Logout
-          </Button>
+          <div className="flex items-center gap-2">
+            <Dialog open={isProfileDialogOpen} onOpenChange={setIsProfileDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" aria-label="Edit profile settings">
+                  <Settings className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Profile
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Profile Settings</DialogTitle>
+                  <DialogDescription>
+                    Update your professional information
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleProfileUpdate} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="system_id_display">System ID</Label>
+                    <Input
+                      id="system_id_display"
+                      value={systemId}
+                      disabled
+                      className="font-mono"
+                    />
+                    <p className="text-xs text-muted-foreground">Your unique identifier (cannot be changed)</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="aphra_registration_number">APHRA Registration Number</Label>
+                    <Input
+                      id="aphra_registration_number"
+                      placeholder="e.g., OCC0001234567"
+                      value={profileData.aphra_registration_number}
+                      onChange={(e) => setProfileData({ ...profileData, aphra_registration_number: e.target.value })}
+                    />
+                    <p className="text-xs text-muted-foreground">Visible to clients and patients</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="mobile_number">Mobile Number</Label>
+                    <Input
+                      id="mobile_number"
+                      type="tel"
+                      placeholder="e.g., 0412 345 678"
+                      value={profileData.mobile_number}
+                      onChange={(e) => setProfileData({ ...profileData, mobile_number: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Office Phone</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="e.g., (02) 1234 5678"
+                      value={profileData.phone}
+                      onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full">Save Changes</Button>
+                </form>
+              </DialogContent>
+            </Dialog>
+            
+            <Button variant="ghost" onClick={handleLogout} aria-label="Logout from portal">
+              <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
+              Logout
+            </Button>
+          </div>
         </div>
       </header>
 

@@ -26,6 +26,7 @@ interface Client {
   first_name: string;
   last_name: string;
   date_of_birth: string | null;
+  mobile_number: string | null;
   diagnosis: string | null;
   funding_body: string | null;
   primary_mobility_aid: string | null;
@@ -44,6 +45,7 @@ export default function Clients() {
     first_name: "",
     last_name: "",
     date_of_birth: "",
+    mobile_number: "",
     diagnosis: "",
     funding_body: "",
     primary_mobility_aid: "",
@@ -144,6 +146,7 @@ export default function Clients() {
         first_name: formData.first_name.trim(),
         last_name: formData.last_name.trim(),
         date_of_birth: formData.date_of_birth || null,
+        mobile_number: formData.mobile_number?.trim() || null,
         diagnosis: formData.diagnosis?.trim() || null,
         funding_body: formData.funding_body as any || null,
         primary_mobility_aid: formData.primary_mobility_aid as any || null,
@@ -163,6 +166,7 @@ export default function Clients() {
         first_name: "",
         last_name: "",
         date_of_birth: "",
+        mobile_number: "",
         diagnosis: "",
         funding_body: "",
         primary_mobility_aid: "",
@@ -239,6 +243,17 @@ export default function Clients() {
                     type="date"
                     value={formData.date_of_birth}
                     onChange={(e) => setFormData({ ...formData, date_of_birth: e.target.value })}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="mobile_number">Mobile Number</Label>
+                  <Input
+                    id="mobile_number"
+                    type="tel"
+                    placeholder="e.g., 0412 345 678"
+                    value={formData.mobile_number}
+                    onChange={(e) => setFormData({ ...formData, mobile_number: e.target.value })}
                   />
                 </div>
 
@@ -352,6 +367,9 @@ export default function Clients() {
                     <p className="text-muted-foreground">
                       DOB: {new Date(client.date_of_birth).toLocaleDateString()}
                     </p>
+                  )}
+                  {client.mobile_number && (
+                    <p className="text-muted-foreground">Mobile: {client.mobile_number}</p>
                   )}
                   {client.diagnosis && (
                     <p className="text-muted-foreground">Diagnosis: {client.diagnosis}</p>

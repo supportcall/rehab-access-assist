@@ -296,6 +296,7 @@ export type Database = {
           funding_body: Database["public"]["Enums"]["funding_body"] | null
           id: string
           last_name: string
+          mobile_number: string | null
           notes: string | null
           primary_mobility_aid:
             | Database["public"]["Enums"]["mobility_aid"]
@@ -313,6 +314,7 @@ export type Database = {
           funding_body?: Database["public"]["Enums"]["funding_body"] | null
           id?: string
           last_name: string
+          mobile_number?: string | null
           notes?: string | null
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
@@ -330,6 +332,7 @@ export type Database = {
           funding_body?: Database["public"]["Enums"]["funding_body"] | null
           id?: string
           last_name?: string
+          mobile_number?: string | null
           notes?: string | null
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
@@ -1011,31 +1014,37 @@ export type Database = {
       }
       profiles: {
         Row: {
+          aphra_registration_number: string | null
           created_at: string | null
           email: string | null
           first_name: string | null
           id: string
           last_name: string | null
+          mobile_number: string | null
           phone: string | null
           system_id: string | null
           updated_at: string | null
         }
         Insert: {
+          aphra_registration_number?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
           id: string
           last_name?: string | null
+          mobile_number?: string | null
           phone?: string | null
           system_id?: string | null
           updated_at?: string | null
         }
         Update: {
+          aphra_registration_number?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
           id?: string
           last_name?: string | null
+          mobile_number?: string | null
           phone?: string | null
           system_id?: string | null
           updated_at?: string | null

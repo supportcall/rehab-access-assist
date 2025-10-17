@@ -47,6 +47,7 @@ export default function StageOne({
         diagnosis: client.diagnosis || "",
         funding_body: client.funding_body || "",
         primary_mobility_aid: client.primary_mobility_aid || "",
+        mobile_number: client.mobile_number || "",
       });
     }
   };
@@ -115,6 +116,18 @@ export default function StageOne({
           type="date"
           value={clientData.date_of_birth}
           onChange={(e) => setClientData({ ...clientData, date_of_birth: e.target.value })}
+          disabled={mode === "select"}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="mobile_number">Mobile Number</Label>
+        <Input
+          id="mobile_number"
+          type="tel"
+          placeholder="e.g., 0412 345 678"
+          value={clientData.mobile_number}
+          onChange={(e) => setClientData({ ...clientData, mobile_number: e.target.value })}
           disabled={mode === "select"}
         />
       </div>
