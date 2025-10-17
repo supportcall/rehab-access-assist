@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Plus, FileText, User as UserIcon, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
+import Footer from "@/components/Footer";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -181,6 +182,8 @@ export default function Dashboard() {
           </Card>
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 }

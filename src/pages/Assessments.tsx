@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, FileText, Calendar } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface Assessment {
   id: string;
@@ -139,6 +140,8 @@ export default function Assessments() {
           </div>
         )}
       </main>
+      
+      <Footer />
     </div>
   );
 }

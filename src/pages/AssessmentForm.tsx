@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, ArrowRight, Plus, Save } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import Footer from "@/components/Footer";
 import StageOne from "@/components/assessment/StageOne";
 import StageTwo from "@/components/assessment/StageTwo";
 import StageThree from "@/components/assessment/StageThree";
@@ -779,6 +780,8 @@ export default function AssessmentForm() {
           </CardContent>
         </Card>
       </main>
+      
+      <Footer />
     </div>
   );
 }

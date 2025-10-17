@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, ArrowLeft, User } from "lucide-react";
+import Footer from "@/components/Footer";
 import {
   Dialog,
   DialogContent,
@@ -301,6 +302,8 @@ export default function Clients() {
           </div>
         )}
       </main>
+      
+      <Footer />
     </div>
   );
 }
