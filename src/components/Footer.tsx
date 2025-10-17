@@ -21,7 +21,8 @@ export default function Footer() {
           <nav aria-label="Footer navigation" className="text-sm text-muted-foreground">
             © {currentYear} SupportCALL. All rights reserved. |{" "}
             <a href="/privacy-policy" className="hover:underline transition-colors">Privacy Policy</a> |{" "}
-            <a href="/terms-of-use" className="hover:underline transition-colors">Terms of Use</a>
+            <a href="/terms-of-use" className="hover:underline transition-colors">Terms of Use</a> |{" "}
+            <span className="font-mono">v1.0.0</span>
           </nav>
           
           <div className="max-w-3xl text-sm text-muted-foreground space-y-2">
