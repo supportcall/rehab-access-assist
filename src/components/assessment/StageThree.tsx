@@ -111,16 +111,16 @@ export default function StageThree({ assessmentId, environmentalAreas, setEnviro
                     <Label>Door Clear Width (mm)</Label>
                     <Input
                       type="number"
-                      value={area.door_clear_width}
-                      onChange={(e) => updateArea(index, "door_clear_width", e.target.value)}
+                      value={area.door_clear_width || ""}
+                      onChange={(e) => updateArea(index, "door_clear_width", e.target.value ? parseFloat(e.target.value) : null)}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label>Threshold Height (mm)</Label>
                     <Input
                       type="number"
-                      value={area.threshold_height}
-                      onChange={(e) => updateArea(index, "threshold_height", e.target.value)}
+                      value={area.threshold_height || ""}
+                      onChange={(e) => updateArea(index, "threshold_height", e.target.value ? parseFloat(e.target.value) : null)}
                     />
                   </div>
                 </div>

@@ -9,6 +9,14 @@ import { Progress } from "@/components/ui/progress";
 import StageOne from "@/components/assessment/StageOne";
 import StageTwo from "@/components/assessment/StageTwo";
 import StageThree from "@/components/assessment/StageThree";
+import StageFour from "@/components/assessment/StageFour";
+import StageFive from "@/components/assessment/StageFive";
+import StageSix from "@/components/assessment/StageSix";
+import StageSeven from "@/components/assessment/StageSeven";
+import StageEight from "@/components/assessment/StageEight";
+import StageNine from "@/components/assessment/StageNine";
+import StageTen from "@/components/assessment/StageTen";
+import StageEleven from "@/components/assessment/StageEleven";
 
 export default function AssessmentForm() {
   const navigate = useNavigate();
@@ -45,6 +53,35 @@ export default function AssessmentForm() {
 
   // Stage 3 data
   const [environmentalAreas, setEnvironmentalAreas] = useState<any[]>([]);
+
+  // Stage 4 data - Clinical Assessment
+  const [clinicalData, setClinicalData] = useState<any>({});
+
+  // Stage 5 data - Pre-visit, Stakeholders, Funding
+  const [preVisitData, setPreVisitData] = useState<any>({});
+  const [stakeholdersData, setStakeholdersData] = useState<any>({});
+  const [fundingData, setFundingData] = useState<any>({});
+
+  // Stage 6 data - AT Audit
+  const [atAuditData, setAtAuditData] = useState<any>({});
+
+  // Stage 7 data - Site Survey, Structural, Measurements
+  const [siteSurveyData, setSiteSurveyData] = useState<any>({});
+  const [structuralData, setStructuralData] = useState<any>({});
+  const [measurements, setMeasurements] = useState<any[]>([]);
+
+  // Stage 8 data - Risks & Options
+  const [risksData, setRisksData] = useState<any[]>([]);
+  const [optionsData, setOptionsData] = useState<any[]>([]);
+
+  // Stage 9 data - Compliance
+  const [complianceData, setComplianceData] = useState<any[]>([]);
+
+  // Stage 10 data - Builder Collaboration
+  const [builderData, setBuilderData] = useState<any>({});
+
+  // Stage 11 data - Deliverables
+  const [deliverablesData, setDeliverablesData] = useState<any>({});
 
   useEffect(() => {
     checkAuthAndLoadData();
@@ -224,7 +261,7 @@ export default function AssessmentForm() {
   };
 
   const nextStage = () => {
-    if (currentStage < 3) {
+    if (currentStage < 11) {
       setCurrentStage(currentStage + 1);
     }
   };
@@ -235,7 +272,24 @@ export default function AssessmentForm() {
     }
   };
 
-  const progress = (currentStage / 3) * 100;
+  const progress = (currentStage / 11) * 100;
+
+  const getStageTitle = () => {
+    const titles = [
+      "Client Information & Demographics",
+      "Functional Needs Assessment",
+      "Environmental Areas",
+      "Clinical Assessment",
+      "Pre-Visit & Funding Pathway",
+      "Assistive Technology Audit",
+      "Site Survey & Measurements",
+      "Risks & Options Analysis",
+      "Compliance Checklist",
+      "Builder Collaboration & Quotes",
+      "Deliverables & Handover"
+    ];
+    return titles[currentStage - 1] || "";
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -262,12 +316,10 @@ export default function AssessmentForm() {
         <Card>
           <CardHeader>
             <CardTitle>
-              Stage {currentStage} of 3
+              Stage {currentStage} of 11
             </CardTitle>
             <CardDescription>
-              {currentStage === 1 && "Client Information & Demographics"}
-              {currentStage === 2 && "Functional Needs Assessment"}
-              {currentStage === 3 && "Environmental Assessment"}
+              {getStageTitle()}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -295,6 +347,72 @@ export default function AssessmentForm() {
               />
             )}
 
+            {currentStage === 4 && (
+              <StageFour
+                clinicalData={clinicalData}
+                setClinicalData={setClinicalData}
+              />
+            )}
+
+            {currentStage === 5 && (
+              <StageFive
+                preVisitData={preVisitData}
+                setPreVisitData={setPreVisitData}
+                stakeholdersData={stakeholdersData}
+                setStakeholdersData={setStakeholdersData}
+                fundingData={fundingData}
+                setFundingData={setFundingData}
+              />
+            )}
+
+            {currentStage === 6 && (
+              <StageSix
+                atAuditData={atAuditData}
+                setAtAuditData={setAtAuditData}
+              />
+            )}
+
+            {currentStage === 7 && (
+              <StageSeven
+                siteSurveyData={siteSurveyData}
+                setSiteSurveyData={setSiteSurveyData}
+                structuralData={structuralData}
+                setStructuralData={setStructuralData}
+                measurements={measurements}
+                setMeasurements={setMeasurements}
+              />
+            )}
+
+            {currentStage === 8 && (
+              <StageEight
+                risksData={risksData}
+                setRisksData={setRisksData}
+                optionsData={optionsData}
+                setOptionsData={setOptionsData}
+              />
+            )}
+
+            {currentStage === 9 && (
+              <StageNine
+                complianceData={complianceData}
+                setComplianceData={setComplianceData}
+              />
+            )}
+
+            {currentStage === 10 && (
+              <StageTen
+                builderData={builderData}
+                setBuilderData={setBuilderData}
+              />
+            )}
+
+            {currentStage === 11 && (
+              <StageEleven
+                deliverablesData={deliverablesData}
+                setDeliverablesData={setDeliverablesData}
+              />
+            )}
+
             <div className="flex justify-between pt-6">
               <Button
                 variant="outline"
@@ -305,7 +423,7 @@ export default function AssessmentForm() {
                 Previous
               </Button>
 
-              {currentStage < 3 ? (
+              {currentStage < 11 ? (
                 <Button onClick={nextStage}>
                   Next
                   <ArrowRight className="ml-2 h-4 w-4" />
