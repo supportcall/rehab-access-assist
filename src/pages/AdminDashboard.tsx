@@ -239,7 +239,7 @@ export default function AdminDashboard() {
             </TabsList>
 
             <TabsContent value="requests" className="space-y-4">
-              <Card>
+              <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
                   <CardTitle>Pending Requests</CardTitle>
                   <CardDescription>Review and approve or reject OT signup requests</CardDescription>
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
                     requests
                       .filter(r => r.status === "pending")
                       .map((request) => (
-                        <Card key={request.id}>
+                        <Card key={request.id} className="bg-background">
                           <CardContent className="pt-6">
                             <div className="flex items-start justify-between">
                               <div className="space-y-2">
@@ -291,7 +291,7 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
                   <CardTitle>Request History</CardTitle>
                   <CardDescription>All processed signup requests</CardDescription>
@@ -303,7 +303,7 @@ export default function AdminDashboard() {
                     requests
                       .filter(r => r.status !== "pending")
                       .map((request) => (
-                        <Card key={request.id}>
+                        <Card key={request.id} className="bg-background">
                           <CardContent className="pt-6">
                             <div className="space-y-2">
                               <div className="flex items-center justify-between">
@@ -334,14 +334,14 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-4">
-              <Card>
+              <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
                   <CardTitle>System Settings</CardTitle>
                   <CardDescription>Configure system-wide settings (view only for now)</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {settings.map((setting) => (
-                    <Card key={setting.id}>
+                    <Card key={setting.id} className="bg-background">
                       <CardContent className="pt-6">
                         <div className="space-y-2">
                           <h3 className="font-semibold">{setting.setting_key}</h3>

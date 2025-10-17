@@ -155,7 +155,7 @@ export default function PendingApproval() {
         </header>
 
         <main className="flex-1 container mx-auto px-4 py-8 flex items-center justify-center">
-          <Card className="max-w-2xl w-full">
+          <Card className="max-w-2xl w-full bg-primary/5 border-primary/20">
             <CardHeader className="text-center space-y-4">
               <div className="flex justify-center">
                 {getStatusIcon()}
