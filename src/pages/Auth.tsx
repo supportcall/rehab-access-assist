@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 import logo from "@/assets/enabledc-logo.png";
@@ -171,12 +171,13 @@ export default function Auth() {
       />
       <main id="main-content" className="w-full max-w-md space-y-4">
         <Button 
-          variant="ghost" 
+          variant="outline" 
           onClick={() => navigate("/")}
-          className="mb-2"
+          className="mb-4"
           aria-label="Return to home page"
         >
-          ← Back to Home
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
         </Button>
         <Card className="w-full">
         <CardHeader className="space-y-4">
