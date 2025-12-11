@@ -144,7 +144,7 @@ export default function PendingApproval() {
         <header className="border-b bg-card">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="RehabSource Logo" className="h-10" />
+              <img src={logo} alt="RehabSource Logo" className="h-12" />
               <h1 className="text-2xl font-bold">OT & Physio Assessment Portal</h1>
             </div>
             <Button variant="ghost" onClick={handleSignOut} className="flex items-center gap-2">

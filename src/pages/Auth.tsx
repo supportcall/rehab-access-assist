@@ -182,7 +182,7 @@ export default function Auth() {
         <Card className="w-full">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <img src={logo} alt="RehabSource - OT & Physio Assessment Portal" className="h-16" />
+            <img src={logo} alt="RehabSource - OT & Physio Assessment Portal" className="h-20" />
           </div>
           <div className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold">OT & Physio Assessment Portal</CardTitle>
