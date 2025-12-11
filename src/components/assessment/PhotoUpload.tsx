@@ -250,9 +250,14 @@ export default function PhotoUpload({
         )}
       </div>
 
-      <p className="text-xs text-muted-foreground">
-        Maximum file size: 5MB. Supported formats: JPG, PNG, WEBP
-      </p>
+      <div className="space-y-1">
+        <p className="text-xs text-muted-foreground">
+          Maximum file size: 5MB. Supported formats: JPG, PNG, WEBP
+        </p>
+        <p className="text-xs text-muted-foreground">
+          <strong>Tip:</strong> For accurate scale and technical drawing creation, we recommend placing a calibrated measuring stick in each photo.
+        </p>
+      </div>
     </div>
   );
 }
