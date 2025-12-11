@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import LocationFields, { LocationData } from "@/components/LocationFields";
 
 interface Client {
   id: string;
@@ -33,6 +34,10 @@ interface Client {
   system_id: string | null;
   assigned_ot_id: string | null;
   created_at: string;
+  postal_code: string | null;
+  suburb: string | null;
+  state: string | null;
+  country: string | null;
 }
 
 export default function Clients() {
@@ -51,6 +56,10 @@ export default function Clients() {
     primary_mobility_aid: "",
     notes: "",
     ot_system_id: "",
+    postal_code: "",
+    suburb: "",
+    state: "",
+    country: "Australia",
   });
 
   useEffect(() => {
@@ -152,6 +161,10 @@ export default function Clients() {
         primary_mobility_aid: formData.primary_mobility_aid as any || null,
         notes: formData.notes?.trim() || null,
         assigned_ot_id: assignedOtId,
+        postal_code: formData.postal_code?.trim() || null,
+        suburb: formData.suburb?.trim() || null,
+        state: formData.state || null,
+        country: formData.country?.trim() || "Australia",
       });
 
       if (error) throw error;
@@ -172,6 +185,10 @@ export default function Clients() {
         primary_mobility_aid: "",
         notes: "",
         ot_system_id: "",
+        postal_code: "",
+        suburb: "",
+        state: "",
+        country: "Australia",
       });
       
       await loadClients();
@@ -303,6 +320,19 @@ export default function Clients() {
                   </Select>
                 </div>
 
+                <div className="border-t pt-4 mt-4">
+                  <h4 className="font-medium text-sm mb-4">Location</h4>
+                  <LocationFields
+                    data={{
+                      postal_code: formData.postal_code,
+                      suburb: formData.suburb,
+                      state: formData.state,
+                      country: formData.country,
+                    }}
+                    onChange={(locationData) => setFormData({ ...formData, ...locationData })}
+                  />
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="notes">Notes</Label>
                   <Textarea
@@ -382,6 +412,11 @@ export default function Clients() {
                   {client.primary_mobility_aid && (
                     <p className="text-muted-foreground">
                       Mobility Aid: {client.primary_mobility_aid.charAt(0).toUpperCase() + client.primary_mobility_aid.slice(1)}
+                    </p>
+                  )}
+                  {(client.suburb || client.postal_code || client.state) && (
+                    <p className="text-muted-foreground">
+                      Location: {[client.suburb, client.state, client.postal_code].filter(Boolean).join(", ")}
                     </p>
                   )}
                   {client.assigned_ot_id && (

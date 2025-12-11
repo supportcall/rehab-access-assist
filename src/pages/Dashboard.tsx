@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import LocationFields from "@/components/LocationFields";
+import ServiceAreaFields from "@/components/ServiceAreaFields";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -31,6 +33,13 @@ export default function Dashboard() {
     aphra_registration_number: "",
     mobile_number: "",
     phone: "",
+    postal_code: "",
+    suburb: "",
+    state: "",
+    country: "Australia",
+    service_area_type: "postal_code",
+    service_area_value: "",
+    service_radius_km: 50,
   });
   const [stats, setStats] = useState({
     totalClients: 0,
@@ -89,7 +98,7 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser();
       
       const [profileRes, clientsRes, assessmentsRes, draftRes, referralsRes] = await Promise.all([
-        supabase.from("profiles").select("system_id, aphra_registration_number, mobile_number, phone").eq("id", user?.id).maybeSingle(),
+        supabase.from("profiles").select("system_id, aphra_registration_number, mobile_number, phone, postal_code, suburb, state, country, service_area_type, service_area_value, service_radius_km").eq("id", user?.id).maybeSingle(),
         supabase.from("clients").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }),
         supabase.from("assessments").select("id", { count: "exact", head: true }).eq("status", "draft"),
@@ -102,6 +111,13 @@ export default function Dashboard() {
           aphra_registration_number: profileRes.data.aphra_registration_number || "",
           mobile_number: profileRes.data.mobile_number || "",
           phone: profileRes.data.phone || "",
+          postal_code: profileRes.data.postal_code || "",
+          suburb: profileRes.data.suburb || "",
+          state: profileRes.data.state || "",
+          country: profileRes.data.country || "Australia",
+          service_area_type: profileRes.data.service_area_type || "postal_code",
+          service_area_value: profileRes.data.service_area_value || "",
+          service_radius_km: profileRes.data.service_radius_km || 50,
         });
       }
 
@@ -127,6 +143,13 @@ export default function Dashboard() {
           aphra_registration_number: profileData.aphra_registration_number?.trim() || null,
           mobile_number: profileData.mobile_number?.trim() || null,
           phone: profileData.phone?.trim() || null,
+          postal_code: profileData.postal_code?.trim() || null,
+          suburb: profileData.suburb?.trim() || null,
+          state: profileData.state || null,
+          country: profileData.country?.trim() || "Australia",
+          service_area_type: profileData.service_area_type || "postal_code",
+          service_area_value: profileData.service_area_value?.trim() || null,
+          service_radius_km: profileData.service_radius_km || 50,
         })
         .eq("id", user?.id);
 
@@ -246,6 +269,28 @@ export default function Dashboard() {
                       onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
                     />
                   </div>
+
+                  <div className="border-t pt-4 mt-4">
+                    <h4 className="font-medium text-sm mb-4">Your Location</h4>
+                    <LocationFields
+                      data={{
+                        postal_code: profileData.postal_code,
+                        suburb: profileData.suburb,
+                        state: profileData.state,
+                        country: profileData.country,
+                      }}
+                      onChange={(locationData) => setProfileData({ ...profileData, ...locationData })}
+                    />
+                  </div>
+
+                  <ServiceAreaFields
+                    data={{
+                      service_area_type: profileData.service_area_type,
+                      service_area_value: profileData.service_area_value,
+                      service_radius_km: profileData.service_radius_km,
+                    }}
+                    onChange={(serviceData) => setProfileData({ ...profileData, ...serviceData })}
+                  />
 
                   <Button type="submit" className="w-full">Save Changes</Button>
                 </form>

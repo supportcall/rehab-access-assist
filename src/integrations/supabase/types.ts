@@ -288,6 +288,7 @@ export type Database = {
       clients: {
         Row: {
           assigned_ot_id: string | null
+          country: string | null
           created_at: string | null
           created_by: string | null
           date_of_birth: string | null
@@ -298,14 +299,18 @@ export type Database = {
           last_name: string
           mobile_number: string | null
           notes: string | null
+          postal_code: string | null
           primary_mobility_aid:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          state: string | null
+          suburb: string | null
           system_id: string | null
           updated_at: string | null
         }
         Insert: {
           assigned_ot_id?: string | null
+          country?: string | null
           created_at?: string | null
           created_by?: string | null
           date_of_birth?: string | null
@@ -316,14 +321,18 @@ export type Database = {
           last_name: string
           mobile_number?: string | null
           notes?: string | null
+          postal_code?: string | null
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          state?: string | null
+          suburb?: string | null
           system_id?: string | null
           updated_at?: string | null
         }
         Update: {
           assigned_ot_id?: string | null
+          country?: string | null
           created_at?: string | null
           created_by?: string | null
           date_of_birth?: string | null
@@ -334,9 +343,12 @@ export type Database = {
           last_name?: string
           mobile_number?: string | null
           notes?: string | null
+          postal_code?: string | null
           primary_mobility_aid?:
             | Database["public"]["Enums"]["mobility_aid"]
             | null
+          state?: string | null
+          suburb?: string | null
           system_id?: string | null
           updated_at?: string | null
         }
@@ -1015,6 +1027,7 @@ export type Database = {
       profiles: {
         Row: {
           aphra_registration_number: string | null
+          country: string | null
           created_at: string | null
           email: string | null
           first_name: string | null
@@ -1022,11 +1035,18 @@ export type Database = {
           last_name: string | null
           mobile_number: string | null
           phone: string | null
+          postal_code: string | null
+          service_area_type: string | null
+          service_area_value: string | null
+          service_radius_km: number | null
+          state: string | null
+          suburb: string | null
           system_id: string | null
           updated_at: string | null
         }
         Insert: {
           aphra_registration_number?: string | null
+          country?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
@@ -1034,11 +1054,18 @@ export type Database = {
           last_name?: string | null
           mobile_number?: string | null
           phone?: string | null
+          postal_code?: string | null
+          service_area_type?: string | null
+          service_area_value?: string | null
+          service_radius_km?: number | null
+          state?: string | null
+          suburb?: string | null
           system_id?: string | null
           updated_at?: string | null
         }
         Update: {
           aphra_registration_number?: string | null
+          country?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
@@ -1046,6 +1073,12 @@ export type Database = {
           last_name?: string | null
           mobile_number?: string | null
           phone?: string | null
+          postal_code?: string | null
+          service_area_type?: string | null
+          service_area_value?: string | null
+          service_radius_km?: number | null
+          state?: string | null
+          suburb?: string | null
           system_id?: string | null
           updated_at?: string | null
         }
