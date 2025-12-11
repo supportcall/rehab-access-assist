@@ -49,7 +49,7 @@ export default function PendingApproval() {
 
       const role = roles?.[0]?.role;
 
-      // If user is already an OT admin, redirect to dashboard
+      // If user is already an OT/Physio admin, redirect to dashboard
       if (role === "ot_admin") {
         navigate("/dashboard");
         return;
@@ -136,16 +136,16 @@ export default function PendingApproval() {
   return (
     <>
       <PageMeta 
-        title="Account Pending Approval - OT Assessment Portal"
-        description="Your OT account is pending administrator approval"
+        title="Account Pending Approval - OT & Physio Assessment Portal"
+        description="Your OT/Physio account is pending administrator approval"
       />
       
       <div className="min-h-screen flex flex-col bg-background">
         <header className="border-b bg-card">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="EnabledCare Logo" className="h-10" />
-              <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
+              <img src={logo} alt="RehabSource Logo" className="h-10" />
+              <h1 className="text-2xl font-bold">OT & Physio Assessment Portal</h1>
             </div>
             <Button variant="ghost" onClick={handleSignOut} className="flex items-center gap-2">
               <LogOut className="h-4 w-4" />

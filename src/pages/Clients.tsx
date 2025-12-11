@@ -203,7 +203,7 @@ export default function Clients() {
     <div className="min-h-screen bg-background">
       <PageMeta 
         title="Client Management"
-        description="Manage patient clients and their occupational therapy assessment records."
+        description="Manage patient clients and their occupational therapy & physiotherapy assessment records."
         canonical={window.location.origin + "/clients"}
       />
       <header className="border-b">

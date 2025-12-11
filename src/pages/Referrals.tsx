@@ -263,7 +263,7 @@ export default function Referrals() {
     <div className="min-h-screen bg-background">
       <PageMeta 
         title="Patient Referrals"
-        description="Manage patient referrals and occupational therapy case assignments."
+        description="Manage patient referrals and occupational therapy & physiotherapy case assignments."
         canonical={window.location.origin + "/referrals"}
       />
       <header className="border-b">
@@ -373,17 +373,17 @@ export default function Referrals() {
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Refer to Another OT</DialogTitle>
+                            <DialogTitle>Refer to Another OT/Physio</DialogTitle>
                             <DialogDescription>
-                              Forward this referral to another occupational therapist
+                              Forward this referral to another occupational therapist or physiotherapist
                             </DialogDescription>
                           </DialogHeader>
                           <div className="space-y-4">
                             <div className="space-y-2">
-                              <Label htmlFor="refer_to_ot">Target OT System ID</Label>
+                              <Label htmlFor="refer_to_ot">Target OT/Physio System ID</Label>
                               <Input
                                 id="refer_to_ot"
-                                placeholder="OT-123456"
+                                placeholder="OT-123456 or PT-123456"
                                 value={referToOtId}
                                 onChange={(e) => setReferToOtId(e.target.value)}
                               />

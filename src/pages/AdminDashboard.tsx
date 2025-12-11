@@ -124,7 +124,7 @@ export default function AdminDashboard() {
 
       toast({
         title: "Request Approved",
-        description: "The OT signup request has been approved successfully.",
+        description: "The OT/Physio signup request has been approved successfully.",
       });
 
       await loadData();
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
 
       toast({
         title: "Request Rejected",
-        description: "The OT signup request has been rejected.",
+        description: "The OT/Physio signup request has been rejected.",
       });
 
       setRejectionDialog({ open: false, requestId: null });
@@ -198,8 +198,8 @@ export default function AdminDashboard() {
   return (
     <>
       <PageMeta 
-        title="Admin Dashboard - OT Assessment Portal"
-        description="System administration dashboard for managing OT signup requests and system settings"
+        title="Admin Dashboard - OT & Physio Assessment Portal"
+        description="System administration dashboard for managing OT & Physio signup requests and system settings"
       />
       
       <div className="min-h-screen flex flex-col bg-background">
@@ -213,7 +213,7 @@ export default function AdminDashboard() {
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <img src={logo} alt="EnabledCare Logo" className="h-10" />
+              <img src={logo} alt="RehabSource Logo" className="h-10" />
               <div>
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
                 <p className="text-sm text-muted-foreground">System Administration</p>
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
             <TabsList>
               <TabsTrigger value="requests" className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
-                OT Signup Requests
+                OT & Physio Signup Requests
                 {pendingCount > 0 && (
                   <Badge variant="destructive" className="ml-2">{pendingCount}</Badge>
                 )}
@@ -242,7 +242,7 @@ export default function AdminDashboard() {
               <Card className="hover:bg-primary/10 transition-colors">
                 <CardHeader>
                   <CardTitle>Pending Requests</CardTitle>
-                  <CardDescription>Review and approve or reject OT signup requests</CardDescription>
+                  <CardDescription>Review and approve or reject OT & Physio signup requests</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {requests.filter(r => r.status === "pending").length === 0 ? (
@@ -374,7 +374,7 @@ export default function AdminDashboard() {
           <DialogHeader>
             <DialogTitle>Reject Signup Request</DialogTitle>
             <DialogDescription>
-              Please provide a reason for rejecting this OT signup request. This will be visible to the applicant.
+              Please provide a reason for rejecting this OT/Physio signup request. This will be visible to the applicant.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">

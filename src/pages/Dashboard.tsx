@@ -191,15 +191,15 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <PageMeta 
         title="Dashboard"
-        description="Manage your occupational therapy assessments, clients, and referrals."
+        description="Manage your occupational therapy and physiotherapy assessments, clients, and referrals."
         canonical={window.location.origin + "/dashboard"}
       />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="EnabledCare - OT Assessment Portal" className="h-12" />
+            <img src={logo} alt="RehabSource - OT & Physio Assessment Portal" className="h-12" />
             <div>
-              <h1 className="text-2xl font-bold">OT Assessment Portal</h1>
+              <h1 className="text-2xl font-bold">OT & Physio Assessment Portal</h1>
               <p className="text-sm text-muted-foreground">
                 Welcome, {user?.user_metadata?.first_name || user?.email}
               </p>
