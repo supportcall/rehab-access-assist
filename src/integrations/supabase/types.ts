@@ -1632,10 +1632,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      approve_ot_signup: {
-        Args: { request_id: string }
-        Returns: undefined
-      }
+      approve_ot_signup: { Args: { request_id: string }; Returns: undefined }
       create_admin_user: {
         Args: {
           admin_email: string
@@ -1645,10 +1642,7 @@ export type Database = {
         }
         Returns: Json
       }
-      generate_system_id: {
-        Args: { prefix: string }
-        Returns: string
-      }
+      generate_system_id: { Args: { prefix: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
