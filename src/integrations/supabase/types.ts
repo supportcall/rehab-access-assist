@@ -1631,6 +1631,62 @@ export type Database = {
         }
         Relationships: []
       }
+      technical_drawings: {
+        Row: {
+          ai_generated: boolean | null
+          annotations: Json | null
+          assessment_id: string
+          created_at: string
+          description: string | null
+          drawing_type: string
+          id: string
+          measurements_used: Json | null
+          photo_references: Json | null
+          room_area: string | null
+          svg_content: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          ai_generated?: boolean | null
+          annotations?: Json | null
+          assessment_id: string
+          created_at?: string
+          description?: string | null
+          drawing_type: string
+          id?: string
+          measurements_used?: Json | null
+          photo_references?: Json | null
+          room_area?: string | null
+          svg_content?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          ai_generated?: boolean | null
+          annotations?: Json | null
+          assessment_id?: string
+          created_at?: string
+          description?: string | null
+          drawing_type?: string
+          id?: string
+          measurements_used?: Json | null
+          photo_references?: Json | null
+          room_area?: string | null
+          svg_content?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "technical_drawings_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
