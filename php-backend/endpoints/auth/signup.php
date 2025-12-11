@@ -58,29 +58,28 @@ try {
     $userId = Database::generateUUID();
     $passwordHash = password_hash($password, PASSWORD_ARGON2ID);
     
-    // For production, set email_confirmed based on AUTO_CONFIRM_EMAIL setting
-    $emailConfirmed = defined('AUTO_CONFIRM_EMAIL') && AUTO_CONFIRM_EMAIL ? 1 : 0;
+    // For production, set email_verified_at based on AUTO_CONFIRM_EMAIL setting
+    $emailVerifiedAt = defined('AUTO_CONFIRM_EMAIL') && AUTO_CONFIRM_EMAIL ? 'NOW()' : 'NULL';
 
     Database::execute(
-        "INSERT INTO users (id, email, password_hash, email_confirmed, created_at, updated_at)
-         VALUES (?, ?, ?, ?, NOW(), NOW())",
-        [$userId, $email, $passwordHash, $emailConfirmed]
+        "INSERT INTO users (id, email, password_hash, first_name, last_name, email_verified_at, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, " . (defined('AUTO_CONFIRM_EMAIL') && AUTO_CONFIRM_EMAIL ? "NOW()" : "NULL") . ", NOW(), NOW())",
+        [$userId, $email, $passwordHash, $firstName, $lastName]
     );
 
     // Generate system ID for profile
     $systemId = generateSystemId('OT');
 
-    // Create profile
-    $profileId = Database::generateUUID();
+    // Create profile (profile.id = user.id)
     Database::execute(
-        "INSERT INTO profiles (id, user_id, first_name, last_name, email, system_id, country, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, 'Australia', NOW(), NOW())",
-        [$profileId, $userId, $firstName, $lastName, $email, $systemId]
+        "INSERT INTO profiles (id, first_name, last_name, email, system_id, country, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, 'Australia', NOW(), NOW())",
+        [$userId, $firstName, $lastName, $email, $systemId]
     );
 
-    // Determine role - first user becomes system_admin, others become pending_ot
+    // Determine role - first 2 users become system_admin, others become pending_ot
     $userCount = Database::count('users', '1=1');
-    $role = ($userCount <= 1) ? 'system_admin' : 'pending_ot';
+    $role = ($userCount <= 2) ? 'system_admin' : 'pending_ot';
 
     // Assign role
     Database::execute(
@@ -103,6 +102,7 @@ try {
     Logger::info("New user registered: {$email} with role: {$role}");
 
     // If email confirmation is required, send confirmation email
+    $emailConfirmed = defined('AUTO_CONFIRM_EMAIL') && AUTO_CONFIRM_EMAIL;
     if (!$emailConfirmed) {
         // TODO: Implement email sending
         Response::success([
