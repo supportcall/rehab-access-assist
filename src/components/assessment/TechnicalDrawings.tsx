@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { Loader2, Wand2, Plus, Download, Trash2, Edit2, Save, X, FileImage, Ruler } from "lucide-react";
 import DiagramBuilder from "./DiagramBuilder";
+import DOMPurify from "dompurify";
+
+// Configure DOMPurify for SVG sanitization
+const sanitizeSVG = (svgContent: string | null | undefined): string => {
+  if (!svgContent) return '';
+  return DOMPurify.sanitize(svgContent, {
+    USE_PROFILES: { svg: true, svgFilters: true },
+    ADD_TAGS: ['use'],
+    ADD_ATTR: ['xlink:href', 'xmlns:xlink'],
+  });
+};
 
 interface Photo {
   url: string;
@@ -471,7 +482,7 @@ export default function TechnicalDrawings({
                         {drawing.svg_content ? (
                           <div 
                             className="w-full h-full"
-                            dangerouslySetInnerHTML={{ __html: drawing.svg_content }}
+                            dangerouslySetInnerHTML={{ __html: sanitizeSVG(drawing.svg_content) }}
                           />
                         ) : (
                           <div className="flex items-center justify-center h-full">
