@@ -190,14 +190,11 @@ export default function Referrals() {
 
       const { data: { user } } = await supabase.auth.getUser();
 
-      // Look up the OT by system ID
-      const { data: targetOt, error: otError } = await supabase
-        .from("profiles")
-        .select("id")
-        .eq("system_id", referToOtId.trim())
-        .single();
+      // Look up the OT by system ID using security definer function
+      const { data: targetOtId, error: otError } = await supabase
+        .rpc("lookup_ot_by_system_id", { p_system_id: referToOtId.trim() });
 
-      if (otError || !targetOt) {
+      if (otError || !targetOtId) {
         throw new Error("Invalid OT System ID");
       }
 
@@ -206,7 +203,7 @@ export default function Referrals() {
         .from("referrals")
         .update({ 
           status: "referred", 
-          referred_to_ot_id: targetOt.id,
+          referred_to_ot_id: targetOtId,
           notes: actionNotes?.trim() || null
         })
         .eq("id", referralId);
@@ -223,7 +220,7 @@ export default function Referrals() {
         .insert({
           client_id: currentReferral.client_id,
           requesting_ot_id: user?.id,
-          target_ot_id: targetOt.id,
+          target_ot_id: targetOtId,
           status: "pending",
           notes: `Referred by ${user?.user_metadata?.first_name || 'OT'}: ${actionNotes || 'No notes'}`,
         });

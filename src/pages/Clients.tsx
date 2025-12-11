@@ -138,17 +138,15 @@ export default function Clients() {
           throw new Error("Invalid OT System ID format. Expected format: OT-123456");
         }
 
-        const { data: otProfile, error: otError } = await supabase
-          .from("profiles")
-          .select("id")
-          .eq("system_id", formData.ot_system_id.trim())
-          .single();
+        // Use security definer function to lookup OT ID
+        const { data: otId, error: otError } = await supabase
+          .rpc("lookup_ot_by_system_id", { p_system_id: formData.ot_system_id.trim() });
 
-        if (otError || !otProfile) {
+        if (otError || !otId) {
           throw new Error("Invalid OT System ID. Please check and try again.");
         }
         
-        assignedOtId = otProfile.id;
+        assignedOtId = otId;
       }
 
       const { error } = await supabase.from("clients").insert({
