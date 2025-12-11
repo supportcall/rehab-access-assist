@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /clients
+Disallow: /assessments
+Disallow: /assessment/
+Disallow: /referrals
+Disallow: /admin
+Disallow: /pending
 
-Sitemap: https://a8e20719-ebd9-448a-a29b-de1dc9b7c090.lovableproject.com/sitemap.xml
-
+Sitemap: https://rehabsource.com.au/sitemap.xml

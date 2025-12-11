@@ -8,6 +8,7 @@ import { getSafeErrorMessage } from "@/lib/errorHandling";
 import { ArrowLeft, ArrowRight, Plus, Save } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 import StageOne from "@/components/assessment/StageOne";
 import StageTwo from "@/components/assessment/StageTwo";
 import StageThree from "@/components/assessment/StageThree";
@@ -673,6 +674,11 @@ export default function AssessmentForm() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title={id ? "Edit Assessment | RehabSource" : "New Assessment | RehabSource"}
+        description="Complete home modifications environmental assessment with NDIS-compliant documentation, measurements, and comprehensive reporting."
+        canonical={window.location.origin + (id ? `/assessment/${id}` : "/assessment/new")}
+      />
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
