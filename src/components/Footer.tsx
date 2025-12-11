@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -20,8 +22,8 @@ export default function Footer() {
           
           <nav aria-label="Footer navigation" className="text-sm text-muted-foreground">
             © {currentYear} SupportCALL. All rights reserved. |{" "}
-            <a href="/privacy-policy" className="hover:underline transition-colors">Privacy Policy</a> |{" "}
-            <a href="/terms-of-use" className="hover:underline transition-colors">Terms of Use</a> |{" "}
+            <Link to="/privacy-policy" className="hover:underline transition-colors">Privacy Policy</Link> |{" "}
+            <Link to="/terms-of-use" className="hover:underline transition-colors">Terms of Use</Link> |{" "}
             <span className="font-mono">v3.1.2</span>
           </nav>
           
