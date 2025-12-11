@@ -8,7 +8,7 @@ import { Plus, FileText, User as UserIcon, LogOut, Settings } from "lucide-react
 import type { User } from "@supabase/supabase-js";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
-import logo from "@/assets/enabledc-logo.png";
+import logo from "@/assets/rehabsource-logo.png";
 import {
   Dialog,
   DialogContent,

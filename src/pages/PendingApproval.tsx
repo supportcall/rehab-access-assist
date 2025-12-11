@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
-import logo from "@/assets/enabledc-logo.png";
+import logo from "@/assets/rehabsource-logo.png";
 
 interface SignupRequest {
   id: string;
