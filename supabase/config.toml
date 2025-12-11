@@ -1,1 +1,4 @@
 project_id = "ceikbqgqvseleavapzis"
+
+[functions.generate-technical-drawing]
+verify_jwt = true
