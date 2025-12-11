@@ -100,6 +100,29 @@ try {
         exit;
     }
 
+    // /admin/signup-requests/{id}/approve
+    if (preg_match('#^/admin/signup-requests/([a-f0-9-]{36})/approve$#', $uri, $m)) {
+        $routeParams['id'] = $m[1];
+        $routeParams['action'] = 'approve';
+        require_once APP_ROOT . '/endpoints/admin/signup-requests.php';
+        exit;
+    }
+
+    // /admin/signup-requests/{id}/reject
+    if (preg_match('#^/admin/signup-requests/([a-f0-9-]{36})/reject$#', $uri, $m)) {
+        $routeParams['id'] = $m[1];
+        $routeParams['action'] = 'reject';
+        require_once APP_ROOT . '/endpoints/admin/signup-requests.php';
+        exit;
+    }
+
+    // /admin/settings/{key}
+    if (preg_match('#^/admin/settings/([a-zA-Z0-9_-]+)$#', $uri, $m)) {
+        $routeParams['key'] = $m[1];
+        require_once APP_ROOT . '/endpoints/admin/settings.php';
+        exit;
+    }
+
     // /referrals/{id}
     if (preg_match('#^/referrals/([a-f0-9-]{36})$#', $uri, $m)) {
         $routeParams['id'] = $m[1];

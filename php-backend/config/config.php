@@ -2,7 +2,8 @@
 /**
  * OT & Physio Assessment Portal - Configuration
  * 
- * IMPORTANT: Copy this file to config.local.php and update with your actual values
+ * IMPORTANT: Copy production.php to config.local.php and update with your actual values
+ * The config.local.php file takes precedence if it exists
  * Never commit config.local.php to version control
  */
 
@@ -10,6 +11,58 @@
 if (!defined('APP_ROOT')) {
     die('Direct access not permitted');
 }
+
+// Load local config if exists (production override)
+$localConfigPath = __DIR__ . '/config.local.php';
+if (file_exists($localConfigPath)) {
+    $localConfig = require $localConfigPath;
+    
+    // Apply local config values
+    if (isset($localConfig['db'])) {
+        define('DB_HOST', $localConfig['db']['host'] ?? 'localhost');
+        define('DB_PORT', $localConfig['db']['port'] ?? '3306');
+        define('DB_NAME', $localConfig['db']['name']);
+        define('DB_USER', $localConfig['db']['user']);
+        define('DB_PASS', $localConfig['db']['pass']);
+        define('DB_CHARSET', $localConfig['db']['charset'] ?? 'utf8mb4');
+    }
+    
+    if (isset($localConfig['jwt'])) {
+        define('JWT_SECRET', $localConfig['jwt']['secret']);
+        define('JWT_ALGORITHM', $localConfig['jwt']['algorithm'] ?? 'HS256');
+        define('JWT_EXPIRY_HOURS', ($localConfig['jwt']['access_expiry'] ?? 3600) / 3600);
+        define('JWT_REFRESH_EXPIRY_DAYS', ($localConfig['jwt']['refresh_expiry'] ?? 604800) / 86400);
+    }
+    
+    if (isset($localConfig['app'])) {
+        define('APP_ENV', $localConfig['app']['debug'] ? 'development' : 'production');
+        define('APP_DEBUG', $localConfig['app']['debug'] ?? false);
+        define('APP_URL', $localConfig['app']['url'] ?? 'https://localhost');
+        if (isset($localConfig['app']['timezone'])) {
+            date_default_timezone_set($localConfig['app']['timezone']);
+        }
+    }
+    
+    if (isset($localConfig['uploads'])) {
+        define('UPLOAD_DIR', $localConfig['uploads']['directory']);
+        define('UPLOAD_MAX_SIZE', $localConfig['uploads']['max_size'] ?? 20 * 1024 * 1024);
+    }
+    
+    if (isset($localConfig['cors'])) {
+        define('CORS_ALLOWED_ORIGINS', $localConfig['cors']['allowed_origins']);
+    }
+    
+    if (isset($localConfig['logging'])) {
+        define('LOG_DIR', $localConfig['logging']['path'] ?? dirname(__DIR__) . '/logs');
+        define('LOG_LEVEL', $localConfig['logging']['level'] ?? 'error');
+    }
+    
+    // Mark that local config was loaded
+    define('LOCAL_CONFIG_LOADED', true);
+}
+
+// Only define defaults if local config wasn't loaded
+if (!defined('LOCAL_CONFIG_LOADED')) {
 
 // ============================================================
 // ENVIRONMENT
@@ -80,13 +133,48 @@ define('API_BASE_PATH', '/api/' . API_VERSION);
 // ============================================================
 // LOGGING
 // ============================================================
-define('LOG_DIR', dirname(__DIR__) . '/logs');
-define('LOG_LEVEL', APP_DEBUG ? 'debug' : 'error'); // debug, info, warning, error
+if (!defined('LOG_DIR')) define('LOG_DIR', dirname(__DIR__) . '/logs');
+if (!defined('LOG_LEVEL')) define('LOG_LEVEL', defined('APP_DEBUG') && APP_DEBUG ? 'debug' : 'error');
+
+} // End of default config block (if local config wasn't loaded)
+
+// ============================================================
+// ENSURE DEFAULTS FOR CONSTANTS THAT MIGHT BE MISSING
+// ============================================================
+if (!defined('ALLOWED_EXTENSIONS')) {
+    define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'webp', 'gif', 'pdf']);
+}
+if (!defined('ALLOWED_MIME_TYPES')) {
+    define('ALLOWED_MIME_TYPES', [
+        'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'
+    ]);
+}
+if (!defined('CORS_ALLOWED_METHODS')) {
+    define('CORS_ALLOWED_METHODS', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+}
+if (!defined('CORS_ALLOWED_HEADERS')) {
+    define('CORS_ALLOWED_HEADERS', 'Content-Type, Authorization, X-Requested-With');
+}
+if (!defined('CORS_MAX_AGE')) {
+    define('CORS_MAX_AGE', 86400);
+}
+if (!defined('PASSWORD_MIN_LENGTH')) {
+    define('PASSWORD_MIN_LENGTH', 6);
+}
+if (!defined('BCRYPT_COST')) {
+    define('BCRYPT_COST', 12);
+}
+if (!defined('API_VERSION')) {
+    define('API_VERSION', 'v1');
+}
+if (!defined('API_BASE_PATH')) {
+    define('API_BASE_PATH', '/api/' . API_VERSION);
+}
 
 // ============================================================
 // ERROR HANDLING
 // ============================================================
-if (APP_DEBUG) {
+if (defined('APP_DEBUG') && APP_DEBUG) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 } else {
@@ -95,13 +183,15 @@ if (APP_DEBUG) {
 }
 
 // ============================================================
-// TIMEZONE
+// TIMEZONE (set if not already set by local config)
 // ============================================================
-date_default_timezone_set('Australia/Sydney');
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set('Australia/Sydney');
+}
 
 // ============================================================
 // SESSION CONFIGURATION
 // ============================================================
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', APP_ENV === 'production' ? 1 : 0);
+ini_set('session.cookie_secure', defined('APP_ENV') && APP_ENV === 'production' ? 1 : 0);
 ini_set('session.cookie_samesite', 'Strict');
