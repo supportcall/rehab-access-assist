@@ -1683,6 +1683,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      lookup_ot_by_system_id: { Args: { p_system_id: string }; Returns: string }
       reject_ot_signup: {
         Args: { reason: string; request_id: string }
         Returns: undefined
