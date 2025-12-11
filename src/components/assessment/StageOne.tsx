@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import LocationFields from "@/components/LocationFields";
 
 interface StageOneProps {
   selectedClientId: string;
@@ -50,6 +51,10 @@ export default function StageOne({
         funding_body: client.funding_body || "",
         primary_mobility_aid: client.primary_mobility_aid || "",
         mobile_number: client.mobile_number || "",
+        postal_code: client.postal_code || "",
+        suburb: client.suburb || "",
+        state: client.state || "",
+        country: client.country || "Australia",
       });
     }
   };
@@ -189,6 +194,20 @@ export default function StageOne({
             <SelectItem value="other">Other</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="border-t pt-4 mt-4">
+        <h4 className="font-medium text-sm mb-4">Client Location</h4>
+        <LocationFields
+          data={{
+            postal_code: clientData.postal_code || "",
+            suburb: clientData.suburb || "",
+            state: clientData.state || "",
+            country: clientData.country || "Australia",
+          }}
+          onChange={(locationData) => setClientData({ ...clientData, ...locationData })}
+          disabled={mode === "select"}
+        />
       </div>
     </div>
   );
