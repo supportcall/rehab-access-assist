@@ -77,7 +77,7 @@ export default function StageFive({ preVisitData, setPreVisitData, stakeholdersD
             { field: "plan_manager", label: "Plan Manager" },
             { field: "builder_bcp", label: "Builder/BCP" },
             { field: "project_manager", label: "Project Manager" },
-            { field: "ot_assessor", label: "OT Assessor" }
+            { field: "ot_assessor", label: "OT/Physio Assessor" }
           ].map(({ field, label }) => (
             <div key={field} className="space-y-2">
               <Label>{label}</Label>

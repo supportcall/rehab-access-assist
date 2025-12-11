@@ -30,7 +30,7 @@ const Index = () => {
     {
       step: "1",
       title: "Pre-Visit Preparation",
-      description: "Clients provide essential information about their home, goals, and current challenges before the OT visit.",
+      description: "Clients provide essential information about their home, goals, and current challenges before the therapist visit.",
       icon: ClipboardCheck,
     },
     {
@@ -141,7 +141,7 @@ const Index = () => {
       <header className="border-b bg-card shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="EnabledCare - Home Modifications Assessment Portal" className="h-10" />
+            <img src={logo} alt="RehabSource - Home Modifications Assessment Portal" className="h-10" />
           </div>
           <Button onClick={() => navigate("/auth")} aria-label="Login or sign up to access portal">
             Login / Sign Up
@@ -198,7 +198,7 @@ const Index = () => {
                   <ul className="space-y-3">
                     {[
                       "Clients understand exactly what information is needed",
-                      "OTs never miss critical assessment items",
+                      "OTs & Physios never miss critical assessment items",
                       "Reports meet NDIS and funder requirements",
                       "Technical specifications ready for builders"
                     ].map((item, i) => (

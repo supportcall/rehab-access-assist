@@ -87,7 +87,7 @@ export default function Assessments() {
     <div className="min-h-screen bg-background">
       <PageMeta 
         title="Assessments"
-        description="View and manage occupational therapy environmental assessments."
+        description="View and manage occupational therapy & physiotherapy environmental assessments."
         canonical={window.location.origin + "/assessments"}
       />
       <header className="border-b">

@@ -8,8 +8,8 @@ export default function TermsOfUse() {
   return (
     <>
       <PageMeta
-        title="Terms of Use | EnableDC"
-        description="EnableDC Terms of Use - Review the terms and conditions for using our occupational therapy assessment platform"
+        title="Terms of Use | RehabSource"
+        description="RehabSource Terms of Use - Review the terms and conditions for using our occupational therapy and physiotherapy assessment platform"
       />
       <div className="min-h-screen flex flex-col">
         <main id="main-content" className="flex-grow">
@@ -29,7 +29,7 @@ export default function TermsOfUse() {
                   <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </p>
                 <p>
-                  Welcome to EnableDC. These Terms of Use ("Terms") govern your access to and use of our occupational therapy assessment platform. By accessing or using EnableDC, you agree to be bound by these Terms.
+                  Welcome to RehabSource. These Terms of Use ("Terms") govern your access to and use of our occupational therapy and physiotherapy assessment platform. By accessing or using RehabSource, you agree to be bound by these Terms.
                 </p>
               </section>
 
@@ -46,7 +46,7 @@ export default function TermsOfUse() {
                 <h3 className="text-xl font-semibold mt-6 mb-3">2.1 Professional Requirements</h3>
                 <p>Our platform is intended for use by:</p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Qualified occupational therapists with current registration</li>
+                  <li>Qualified occupational therapists and physiotherapists with current registration</li>
                   <li>Healthcare professionals with appropriate credentials</li>
                   <li>Authorized staff members of approved organizations</li>
                 </ul>
@@ -65,9 +65,9 @@ export default function TermsOfUse() {
                 <h2 className="text-2xl font-semibold mt-8 mb-4">3. Use of Services</h2>
                 
                 <h3 className="text-xl font-semibold mt-6 mb-3">3.1 Permitted Use</h3>
-                <p>You may use EnableDC to:</p>
+                <p>You may use RehabSource to:</p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Conduct and document occupational therapy assessments</li>
+                  <li>Conduct and document occupational therapy and physiotherapy assessments</li>
                   <li>Generate professional reports and recommendations</li>
                   <li>Store and manage client assessment data securely</li>
                   <li>Collaborate with other authorized healthcare professionals</li>
@@ -88,7 +88,7 @@ export default function TermsOfUse() {
 
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">4. Professional Responsibilities</h2>
-                <p>As a healthcare professional using EnableDC, you agree to:</p>
+                <p>As a healthcare professional using RehabSource, you agree to:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Comply with all applicable professional standards and regulations</li>
                   <li>Obtain appropriate consent from clients before conducting assessments</li>
@@ -104,12 +104,12 @@ export default function TermsOfUse() {
                 
                 <h3 className="text-xl font-semibold mt-6 mb-3">5.1 Your Content</h3>
                 <p>
-                  You retain ownership of all data and content you submit to EnableDC. By submitting content, you grant us a license to use, store, and process it solely for the purpose of providing our services to you.
+                  You retain ownership of all data and content you submit to RehabSource. By submitting content, you grant us a license to use, store, and process it solely for the purpose of providing our services to you.
                 </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">5.2 Platform Content</h3>
                 <p>
-                  All content, features, and functionality of EnableDC, including but not limited to text, graphics, logos, and software, are owned by SupportCALL or its licensors and are protected by intellectual property laws.
+                  All content, features, and functionality of RehabSource, including but not limited to text, graphics, logos, and software, are owned by SupportCALL or its licensors and are protected by intellectual property laws.
                 </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">5.3 Data Backup</h3>
@@ -121,14 +121,14 @@ export default function TermsOfUse() {
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">6. Fees and Payment</h2>
                 <p>
-                  Access to EnableDC may require payment of subscription fees or usage charges. All fees are non-refundable unless otherwise specified. We reserve the right to modify our pricing structure with reasonable notice.
+                  Access to RehabSource may require payment of subscription fees or usage charges. All fees are non-refundable unless otherwise specified. We reserve the right to modify our pricing structure with reasonable notice.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">7. Disclaimer of Warranties</h2>
                 <p>
-                  EnableDC is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that:
+                  RehabSource is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>The platform will be uninterrupted or error-free</li>
@@ -141,7 +141,7 @@ export default function TermsOfUse() {
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">8. Limitation of Liability</h2>
                 <p>
-                  To the maximum extent permitted by law, SupportCALL shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of EnableDC, including but not limited to:
+                  To the maximum extent permitted by law, SupportCALL shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of RehabSource, including but not limited to:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Loss of profits or data</li>
@@ -157,7 +157,7 @@ export default function TermsOfUse() {
                   You agree to indemnify and hold harmless SupportCALL, its affiliates, and their respective officers, directors, employees, and agents from any claims, damages, losses, or expenses arising from:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Your use of EnableDC</li>
+                  <li>Your use of RehabSource</li>
                   <li>Your violation of these Terms</li>
                   <li>Your violation of any rights of another person or entity</li>
                   <li>Your professional conduct or clinical decisions</li>
@@ -167,7 +167,7 @@ export default function TermsOfUse() {
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">10. Term and Termination</h2>
                 <p>
-                  These Terms remain in effect while you use EnableDC. We may suspend or terminate your access at any time for violation of these Terms or for any other reason. Upon termination:
+                  These Terms remain in effect while you use RehabSource. We may suspend or terminate your access at any time for violation of these Terms or for any other reason. Upon termination:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Your right to use the platform immediately ceases</li>
@@ -180,14 +180,14 @@ export default function TermsOfUse() {
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">11. Changes to Terms</h2>
                 <p>
-                  We reserve the right to modify these Terms at any time. We will notify you of material changes by posting the updated Terms on this page and updating the "Last Updated" date. Your continued use of EnableDC after changes constitutes acceptance of the modified Terms.
+                  We reserve the right to modify these Terms at any time. We will notify you of material changes by posting the updated Terms on this page and updating the "Last Updated" date. Your continued use of RehabSource after changes constitutes acceptance of the modified Terms.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold mt-8 mb-4">12. Governing Law</h2>
                 <p>
-                  These Terms are governed by the laws of Australia. Any disputes arising from these Terms or your use of EnableDC shall be subject to the exclusive jurisdiction of the courts of Australia.
+                  These Terms are governed by the laws of Australia. Any disputes arising from these Terms or your use of RehabSource shall be subject to the exclusive jurisdiction of the courts of Australia.
                 </p>
               </section>
 
@@ -206,7 +206,7 @@ export default function TermsOfUse() {
               <section className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="text-lg font-semibold mb-2">Professional Standards Compliance</h3>
                 <p className="text-sm">
-                  EnableDC is designed to support compliance with occupational therapy professional standards, including those set by Occupational Therapy Australia and relevant regulatory bodies. However, users remain solely responsible for ensuring their practice meets all applicable professional and legal requirements.
+                  RehabSource is designed to support compliance with occupational therapy and physiotherapy professional standards, including those set by Occupational Therapy Australia, the Australian Physiotherapy Association, and relevant regulatory bodies. However, users remain solely responsible for ensuring their practice meets all applicable professional and legal requirements.
                 </p>
               </section>
             </div>

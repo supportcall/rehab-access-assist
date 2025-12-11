@@ -8,8 +8,8 @@ export default function PrivacyPolicy() {
   return (
     <>
       <PageMeta
-        title="Privacy Policy | EnableDC"
-        description="EnableDC Privacy Policy - Learn how we collect, use, and protect your personal information"
+        title="Privacy Policy | RehabSource"
+        description="RehabSource Privacy Policy - Learn how we collect, use, and protect your personal information"
       />
       <div className="min-h-screen flex flex-col">
         <main id="main-content" className="flex-grow">
@@ -29,7 +29,7 @@ export default function PrivacyPolicy() {
                   <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </p>
                 <p>
-                  EnableDC ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our occupational therapy assessment platform.
+                  RehabSource ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our occupational therapy and physiotherapy assessment platform.
                 </p>
               </section>
 

@@ -166,7 +166,7 @@ export default function Auth() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <PageMeta 
         title="Login & Sign Up"
-        description="Access your OT Assessment Portal account to manage clients, assessments, and referrals."
+        description="Access your OT & Physio Assessment Portal account to manage clients, assessments, and referrals."
         canonical={window.location.origin + "/auth"}
       />
       <main id="main-content" className="w-full max-w-md space-y-4">
@@ -182,12 +182,12 @@ export default function Auth() {
         <Card className="w-full">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <img src={logo} alt="EnabledCare - OT Assessment Portal" className="h-16" />
+            <img src={logo} alt="RehabSource - OT & Physio Assessment Portal" className="h-16" />
           </div>
           <div className="space-y-1 text-center">
-            <CardTitle className="text-2xl font-bold">OT Assessment Portal</CardTitle>
+            <CardTitle className="text-2xl font-bold">OT & Physio Assessment Portal</CardTitle>
             <CardDescription>
-              Occupational Therapy Environmental Assessment System
+              Occupational Therapy & Physiotherapy Environmental Assessment System
             </CardDescription>
           </div>
         </CardHeader>
