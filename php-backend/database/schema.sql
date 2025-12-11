@@ -22,7 +22,7 @@
 -- TABLE: users (Authentication - replaces Supabase auth.users)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS users (
-    id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    id CHAR(36) NOT NULL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     first_name VARCHAR(100) DEFAULT NULL,
