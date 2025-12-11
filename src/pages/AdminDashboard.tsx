@@ -213,7 +213,7 @@ export default function AdminDashboard() {
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <img src={logo} alt="RehabSource Logo" className="h-10" />
+              <img src={logo} alt="RehabSource Logo" className="h-12" />
               <div>
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
                 <p className="text-sm text-muted-foreground">System Administration</p>
