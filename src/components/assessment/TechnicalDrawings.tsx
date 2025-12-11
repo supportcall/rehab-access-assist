@@ -33,11 +33,11 @@ interface TechnicalDrawing {
 }
 
 interface TechnicalDrawingsProps {
-  assessmentId: string | null;
-  environmentalAreas: any[];
-  measurements: any[];
-  clinicalData: any;
-  siteSurveyData: any;
+  assessmentId: string;
+  environmentalAreas?: any[];
+  measurements?: any[];
+  clinicalData?: any;
+  siteSurveyData?: any;
 }
 
 const DRAWING_TYPES = [
@@ -63,10 +63,10 @@ const ROOM_AREAS = [
 
 export default function TechnicalDrawings({
   assessmentId,
-  environmentalAreas,
-  measurements,
-  clinicalData,
-  siteSurveyData,
+  environmentalAreas = [],
+  measurements = [],
+  clinicalData = {},
+  siteSurveyData = {},
 }: TechnicalDrawingsProps) {
   const { toast } = useToast();
   const [drawings, setDrawings] = useState<TechnicalDrawing[]>([]);

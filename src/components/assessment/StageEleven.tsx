@@ -2,13 +2,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import TechnicalDrawings from "./TechnicalDrawings";
 
 interface StageElevenProps {
+  assessmentId: string;
   deliverablesData: any;
   setDeliverablesData: (data: any) => void;
 }
 
-export default function StageEleven({ deliverablesData, setDeliverablesData }: StageElevenProps) {
+export default function StageEleven({ assessmentId, deliverablesData, setDeliverablesData }: StageElevenProps) {
   const updateField = (field: string, value: any) => {
     setDeliverablesData({ ...deliverablesData, [field]: value });
   };
@@ -62,6 +64,9 @@ export default function StageEleven({ deliverablesData, setDeliverablesData }: S
           </div>
         </CardContent>
       </Card>
+
+      {/* Technical Drawings Section */}
+      <TechnicalDrawings assessmentId={assessmentId} />
 
       <Card>
         <CardHeader>

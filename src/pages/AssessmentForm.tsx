@@ -792,8 +792,9 @@ export default function AssessmentForm() {
               />
             )}
 
-            {currentStage === 11 && (
+            {currentStage === 11 && assessmentId && (
               <StageEleven
+                assessmentId={assessmentId}
                 deliverablesData={deliverablesData}
                 setDeliverablesData={setDeliverablesData}
               />
