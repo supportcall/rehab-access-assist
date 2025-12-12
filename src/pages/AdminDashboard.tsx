@@ -8,8 +8,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon, Database, Save, Eye, EyeOff } from "lucide-react";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
@@ -35,6 +36,12 @@ interface SystemSetting {
   description: string | null;
 }
 
+interface DatabaseConfig {
+  db_name: string;
+  db_user: string;
+  db_password: string;
+}
+
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -43,6 +50,9 @@ export default function AdminDashboard() {
   const [settings, setSettings] = useState<SystemSetting[]>([]);
   const [rejectionDialog, setRejectionDialog] = useState<{ open: boolean; requestId: string | null }>({ open: false, requestId: null });
   const [rejectionReason, setRejectionReason] = useState("");
+  const [dbConfig, setDbConfig] = useState<DatabaseConfig>({ db_name: "", db_user: "", db_password: "" });
+  const [showPassword, setShowPassword] = useState(false);
+  const [savingDbConfig, setSavingDbConfig] = useState(false);
 
   useEffect(() => {
     checkAuthAndLoadData();
@@ -105,12 +115,67 @@ export default function AdminDashboard() {
 
       if (settingsError) throw settingsError;
       setSettings(settingsData || []);
+
+      // Load database config from settings
+      const dbNameSetting = settingsData?.find(s => s.setting_key === "db_name");
+      const dbUserSetting = settingsData?.find(s => s.setting_key === "db_user");
+      const dbPasswordSetting = settingsData?.find(s => s.setting_key === "db_password");
+      
+      setDbConfig({
+        db_name: String(dbNameSetting?.setting_value ?? ""),
+        db_user: String(dbUserSetting?.setting_value ?? ""),
+        db_password: String(dbPasswordSetting?.setting_value ?? ""),
+      });
     } catch (error: any) {
       toast({
         title: "Error",
         description: getSafeErrorMessage(error),
         variant: "destructive",
       });
+    }
+  };
+
+  const handleSaveDbConfig = async () => {
+    setSavingDbConfig(true);
+    try {
+      // Save each database setting
+      const settingsToSave = [
+        { key: "db_name", value: dbConfig.db_name, description: "Database Name" },
+        { key: "db_user", value: dbConfig.db_user, description: "Database Admin User" },
+        { key: "db_password", value: dbConfig.db_password, description: "Database Admin User Password" },
+      ];
+
+      for (const setting of settingsToSave) {
+        const existing = settings.find(s => s.setting_key === setting.key);
+        
+        if (existing) {
+          const { error } = await supabase
+            .from("system_settings")
+            .update({ setting_value: setting.value, description: setting.description })
+            .eq("id", existing.id);
+          if (error) throw error;
+        } else {
+          const { error } = await supabase
+            .from("system_settings")
+            .insert({ setting_key: setting.key, setting_value: setting.value, description: setting.description });
+          if (error) throw error;
+        }
+      }
+
+      toast({
+        title: "Database Configuration Saved",
+        description: "Database settings have been updated successfully.",
+      });
+
+      await loadData();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: getSafeErrorMessage(error),
+        variant: "destructive",
+      });
+    } finally {
+      setSavingDbConfig(false);
     }
   };
 
@@ -334,27 +399,100 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-4">
+              {/* Database Configuration */}
               <Card className="hover:bg-primary/10 transition-colors">
                 <CardHeader>
-                  <CardTitle>System Settings</CardTitle>
-                  <CardDescription>Configure system-wide settings (view only for now)</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <Database className="h-5 w-5" />
+                    Database Configuration
+                  </CardTitle>
+                  <CardDescription>Configure database connection settings for the PHP backend</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {settings.map((setting) => (
-                    <Card key={setting.id} className="hover:bg-primary/10 transition-colors">
-                      <CardContent className="pt-6">
-                        <div className="space-y-2">
-                          <h3 className="font-semibold">{setting.setting_key}</h3>
-                          {setting.description && (
-                            <p className="text-sm text-muted-foreground">{setting.description}</p>
-                          )}
-                          <pre className="text-xs bg-muted p-2 rounded overflow-auto">
-                            {JSON.stringify(setting.setting_value, null, 2)}
-                          </pre>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="db_name">Database Name</Label>
+                      <Input
+                        id="db_name"
+                        placeholder="Enter database name"
+                        value={dbConfig.db_name}
+                        onChange={(e) => setDbConfig(prev => ({ ...prev, db_name: e.target.value }))}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="db_user">Database Admin User</Label>
+                      <Input
+                        id="db_user"
+                        placeholder="Enter database admin username"
+                        value={dbConfig.db_user}
+                        onChange={(e) => setDbConfig(prev => ({ ...prev, db_user: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="db_password">Database Admin User Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="db_password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter database admin password"
+                        value={dbConfig.db_password}
+                        onChange={(e) => setDbConfig(prev => ({ ...prev, db_password: e.target.value }))}
+                        className="pr-10"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                        onClick={() => setShowPassword(!showPassword)}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex justify-end pt-2">
+                    <Button
+                      onClick={handleSaveDbConfig}
+                      disabled={savingDbConfig}
+                      className="flex items-center gap-2"
+                    >
+                      <Save className="h-4 w-4" />
+                      {savingDbConfig ? "Saving..." : "Save Database Configuration"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Other System Settings */}
+              <Card className="hover:bg-primary/10 transition-colors">
+                <CardHeader>
+                  <CardTitle>Other System Settings</CardTitle>
+                  <CardDescription>Additional system-wide configuration settings</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {settings.filter(s => !["db_name", "db_user", "db_password"].includes(s.setting_key)).length === 0 ? (
+                    <p className="text-muted-foreground text-center py-8">No additional settings configured</p>
+                  ) : (
+                    settings
+                      .filter(s => !["db_name", "db_user", "db_password"].includes(s.setting_key))
+                      .map((setting) => (
+                        <Card key={setting.id} className="hover:bg-primary/10 transition-colors">
+                          <CardContent className="pt-6">
+                            <div className="space-y-2">
+                              <h3 className="font-semibold">{setting.setting_key}</h3>
+                              {setting.description && (
+                                <p className="text-sm text-muted-foreground">{setting.description}</p>
+                              )}
+                              <pre className="text-xs bg-muted p-2 rounded overflow-auto">
+                                {JSON.stringify(setting.setting_value, null, 2)}
+                              </pre>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
