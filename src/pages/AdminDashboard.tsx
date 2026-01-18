@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon, Shield, AlertTriangle } from "lucide-react";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
@@ -35,7 +34,6 @@ interface SystemSetting {
   setting_value: any;
   description: string | null;
 }
-
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -107,57 +105,12 @@ export default function AdminDashboard() {
 
       if (settingsError) throw settingsError;
       setSettings(settingsData || []);
-
     } catch (error: any) {
       toast({
         title: "Error",
         description: getSafeErrorMessage(error),
         variant: "destructive",
       });
-    }
-  };
-
-  const handleSaveDbConfig = async () => {
-    setSavingDbConfig(true);
-    try {
-      // Save each database setting
-      const settingsToSave = [
-        { key: "db_name", value: dbConfig.db_name, description: "Database Name" },
-        { key: "db_user", value: dbConfig.db_user, description: "Database Admin User" },
-        { key: "db_password", value: dbConfig.db_password, description: "Database Admin User Password" },
-      ];
-
-      for (const setting of settingsToSave) {
-        const existing = settings.find(s => s.setting_key === setting.key);
-        
-        if (existing) {
-          const { error } = await supabase
-            .from("system_settings")
-            .update({ setting_value: setting.value, description: setting.description })
-            .eq("id", existing.id);
-          if (error) throw error;
-        } else {
-          const { error } = await supabase
-            .from("system_settings")
-            .insert({ setting_key: setting.key, setting_value: setting.value, description: setting.description });
-          if (error) throw error;
-        }
-      }
-
-      toast({
-        title: "Database Configuration Saved",
-        description: "Database settings have been updated successfully.",
-      });
-
-      await loadData();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: getSafeErrorMessage(error),
-        variant: "destructive",
-      });
-    } finally {
-      setSavingDbConfig(false);
     }
   };
 
@@ -415,7 +368,7 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
 
-              {/* Other System Settings */}
+              {/* Application Settings */}
               <Card className="hover:bg-primary/10 transition-colors">
                 <CardHeader>
                   <CardTitle>Application Settings</CardTitle>
@@ -426,30 +379,20 @@ export default function AdminDashboard() {
                     <p className="text-muted-foreground text-center py-8">No settings configured</p>
                   ) : (
                     settings.map((setting) => (
-                        <Card key={setting.id} className="hover:bg-primary/10 transition-colors">
-                          <CardContent className="pt-6">
-                            <div className="space-y-2">
-                              <h3 className="font-semibold">{setting.setting_key}</h3>
-                              {setting.description && (
-                                <p className="text-sm text-muted-foreground">{setting.description}</p>
-                              )}
-                              <pre className="text-xs bg-muted p-2 rounded overflow-auto">
-                                {JSON.stringify(setting.setting_value, null, 2)}
-                              </pre>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-                                {JSON.stringify(setting.setting_value, null, 2)}
-                              </pre>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))
+                      <Card key={setting.id} className="hover:bg-primary/10 transition-colors">
+                        <CardContent className="pt-6">
+                          <div className="space-y-2">
+                            <h3 className="font-semibold">{setting.setting_key}</h3>
+                            {setting.description && (
+                              <p className="text-sm text-muted-foreground">{setting.description}</p>
+                            )}
+                            <pre className="text-xs bg-muted p-2 rounded overflow-auto">
+                              {JSON.stringify(setting.setting_value, null, 2)}
+                            </pre>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))
                   )}
                 </CardContent>
               </Card>
