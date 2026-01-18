@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon, Shield, AlertTriangle } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Clock, Users, Settings as SettingsIcon, Shield, AlertTriangle, LogOut } from "lucide-react";
 import { getSafeErrorMessage } from "@/lib/errorHandling";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
@@ -219,6 +219,21 @@ export default function AdminDashboard() {
                 <p className="text-sm text-muted-foreground">System Administration</p>
               </div>
             </div>
+            <Button 
+              variant="ghost" 
+              onClick={async () => {
+                await supabase.auth.signOut();
+                toast({
+                  title: "Logged out",
+                  description: "You have been logged out successfully",
+                });
+                navigate("/");
+              }} 
+              aria-label="Logout from portal"
+            >
+              <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
+              Logout
+            </Button>
           </div>
         </header>
 
