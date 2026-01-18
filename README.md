@@ -1,73 +1,146 @@
-# Welcome to your Lovable project
+# Rehab Source - OT Home Modifications Assessment Portal
 
-## Project info
+**Australia's Premier Home Modifications Assessment Platform for Occupational Therapists & Physiotherapists**
 
-**URL**: https://lovable.dev/projects/a8e20719-ebd9-448a-a29b-de1dc9b7c090
+**Production Domain:** https://rehabsource.com.au  
+**Version:** 1.0.0  
+**Status:** Production Ready
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Overview
 
-**Use Lovable**
+Rehab Source is a comprehensive, tablet-first Progressive Web Application (PWA) designed for Australian healthcare professionals conducting home modification assessments. The platform streamlines the entire assessment workflow from client intake through to NDIS funding applications.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a8e20719-ebd9-448a-a29b-de1dc9b7c090) and start prompting.
+### Who Is This For?
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Occupational Therapists** - Conduct structured assessments, capture measurements, generate compliant reports
+- **Physiotherapists** - Assess mobility and transfer requirements, document recommendations
+- **Clients & Carers** - Prepare for assessments, access reports, manage consent
+- **Case Managers** - Track assessments, request services, review reports
+- **Support Coordinators** - Facilitate NDIS funding applications
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Key Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Assessment Workflow
+- ✅ 11-stage comprehensive assessment wizard
+- ✅ Photo documentation with measurement stick scaling
+- ✅ Technical drawing generation (AI-assisted)
+- ✅ Compliance checking (AS 1428.1, NCC, LHDS)
+- ✅ Options analysis with cost estimates
+- ✅ Risk register and controls documentation
 
-Follow these steps:
+### Clinical Tools
+- ✅ Anthropometric measurements capture
+- ✅ Environmental area assessments
+- ✅ ADL (Activities of Daily Living) documentation
+- ✅ Home FAST, SAFER Home, Westmead scoring
+- ✅ AT (Assistive Technology) audit integration
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Administration
+- ✅ Multi-role user management (OT, Admin, Client)
+- ✅ OT signup approval workflow
+- ✅ Client management with system IDs (PT-XXXXXX)
+- ✅ Therapist profiles with system IDs (OT-XXXXXX)
+- ✅ Referral system between therapists
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Compliance & Security
+- ✅ NDIS Practice Standards aligned
+- ✅ Australian Premises Standards referenced
+- ✅ Argon2id password hashing
+- ✅ JWT authentication with refresh tokens
+- ✅ Role-based access control (RBAC)
+- ✅ Clinical data encryption at rest
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Technology Stack
+
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for build tooling
+- **Tailwind CSS** with shadcn/ui components
+- **React Query** for data management
+- **PWA** capabilities for offline use
+
+### Backend (Self-Hosted Option)
+- **PHP 8.2+** with custom API framework
+- **MySQL 8.0+** database
+- **JWT** authentication
+- **RESTful API** design
+
+### Cloud Backend (Development)
+- **Lovable Cloud** (Supabase-based)
+- **Edge Functions** for serverless logic
+- **PostgreSQL** with Row Level Security
+
+---
+
+## Quick Links
+
+| Document | Description |
+|----------|-------------|
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Complete server deployment guide |
+| [MYSQL_SCHEMA.sql](MYSQL_SCHEMA.sql) | Database schema for MySQL setup |
+| [SEO_AND_MARKETING.md](SEO_AND_MARKETING.md) | SEO optimization and Google Business guide |
+| [php-backend/README.md](php-backend/README.md) | PHP API backend documentation |
+
+---
+
+## Development
+
+### Prerequisites
+- Node.js 18+
+- npm or bun
+
+### Local Development
+```bash
+# Clone repository
+git clone https://github.com/supportcall/rehab-access-assist.git
+cd rehab-access-assist
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Production Build
+```bash
+npm run build
+# Output: dist/ folder
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete step-by-step deployment instructions for cPanel VPS environments.
 
-## What technologies are used for this project?
+### Quick Summary
+1. Build frontend: `npm run build`
+2. Create MySQL database and import schema
+3. Upload frontend (dist/) and backend (php-backend/) to server
+4. Configure `config.local.php` with database credentials
+5. Create first admin user via signup
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Support
 
-## How can I deploy this project?
+- **Email:** support@rehab-source.com
+- **Documentation:** See /docs folder
 
-Simply open [Lovable](https://lovable.dev/projects/a8e20719-ebd9-448a-a29b-de1dc9b7c090) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes, you can!
+Proprietary - All Rights Reserved  
+© 2025 Rehab Source Pty Ltd
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Built with ❤️ for Australian Healthcare Professionals**
